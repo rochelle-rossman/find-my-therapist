@@ -54,7 +54,7 @@ const examplePromise = () => {
     .catch((error) => {
       console.error(error);
     });
-});
+};
 ```
 
 ### Deploying on Netlify
