@@ -1,0 +1,26 @@
+{
+  "-NACPLTTQoO6ZIUqYUAD": {
+    "firebaseKey": "-NACPLTTQoO6ZIUqYUAD",
+    "gender": "Woman"
+  },
+  "-NACPLTTQoO6ZIUqYUAE": {
+    "firebaseKey": "-NACPLTTQoO6ZIUqYUAE",
+    "gender": "Man"
+  },
+  "-NACPLTTQoO6ZIUqYUAF": {
+    "firebaseKey": "-NACPLTTQoO6ZIUqYUAF",
+    "gender": "Transfeminine"
+  },
+  "-NACPLTUTMUWzacVzzal": {
+    "firebaseKey": "-NACPLTUTMUWzacVzzal",
+    "gender": "Transmasculine"
+  },
+  "-NACPLTUTMUWzacVzzam": {
+    "firebaseKey": "-NACPLTUTMUWzacVzzam",
+    "gender": "Non-binary/non-conforming"
+  },
+  "-NACPLTUTMUWzacVzzan": {
+    "firebaseKey": "-NACPLTUTMUWzacVzzan",
+    "gender": "Prefer not to respond"
+  }
+}
