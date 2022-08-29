@@ -20,3 +20,9 @@ a {
 body {
   background-color: #88effd;
 }
+
+.userIcon {
+  border-radius: 50%;
+  height: 40px;
+}
+
