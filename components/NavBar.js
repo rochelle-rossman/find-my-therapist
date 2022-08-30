@@ -27,12 +27,12 @@ export default function NavBar() {
               </Link>
             </li>
             <li className="nav-item">
-              <Link passHref href="/blog">
+              <Link passHref href="/blog/blogPosts">
                 <a className="nav-link">Read Blog Posts</a>
               </Link>
             </li>
             <li className="nav-item">
-              <Link passHref href="/">
+              <Link passHref href="/blog/new">
                 <a className="nav-link">Create Blog Post</a>
               </Link>
             </li>
@@ -49,7 +49,9 @@ export default function NavBar() {
             <button type="button" className="btn btn-danger" onClick={signOut}>
               Sign Out
             </button>
-            <img className="userIcon" src={user.photoURL} alt={user.displayName} />
+            <Link passHref href="/profile">
+              <img className="userIcon" src={user.photoURL} alt={user.displayName} />
+            </Link>
           </ul>
         </div>
       </div>

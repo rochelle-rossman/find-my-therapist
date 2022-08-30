@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react';
 import { getUsers } from '../api/userData';
 import UserCard from '../components/UserCard';
+import UserForm from '../components/UserForm';
 // import { useAuth } from '../utils/context/authContext';
 
 function Home() {
@@ -17,10 +18,12 @@ function Home() {
   }, []);
 
   return (
-    <div className="d-flex flex-wrap">
+    <div>
       {users.map((client) => (
-        <UserCard key={client.firebaseKey} userObj={client} />
+        <UserCard key={client.firebaseKey} userObj={client} onUpdate={getAllUsers} />
       ))}
+
+      <UserForm />
     </div>
   );
 }
