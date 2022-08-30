@@ -26,3 +26,18 @@ body {
   height: 40px;
 }
 
+.card{
+  flex-direction: row;
+}
+
+.contentPreview {
+  white-space: nowrap; 
+  width: 400px; 
+  overflow: hidden;
+  text-overflow: ellipsis; 
+}
+
+.blogCardPhoto{
+  height: 250px;
+  width: 250px;
+}

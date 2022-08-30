@@ -8,15 +8,15 @@ function BlogPostCard({ blogObj }) {
   return (
     <>
       <div className="mb-3 d-flex align-items-center">
-        <Card style={{ width: '18rem' }}>
-          <Card.Img variant="top" src={blogObj.photo} />
+        <Card style={{ width: '50rem' }}>
+          <Card.Img className="blogCardPhoto" src={blogObj.photo} />
           <Card.Body>
             <Card.Title>{blogObj.title}</Card.Title>
-            <Card.Text>{blogObj.content}</Card.Text>
+            <Card.Text className="contentPreview">{blogObj.content}</Card.Text>
             <p>{blogObj.timeStamp}</p>
-            <Button variant="primary">Go somewhere</Button>
-            <Button variant="primary">Go somewhere</Button>
-            <Button variant="primary">Go somewhere</Button>
+            <Button variant="danger">DELETE</Button>
+            <Button variant="primary">EDIT</Button>
+            <Button variant="success">READ MORE</Button>
           </Card.Body>
         </Card>
       </div>

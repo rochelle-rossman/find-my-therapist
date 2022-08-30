@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
-import { getBlogPosts } from '../api/blogData';
-import BlogPostCard from '../components/BlogPostCard';
+import { getBlogPosts } from '../../api/blogData';
+import BlogPostCard from '../../components/BlogPostCard';
 
 export default function Blog() {
   const [blogPosts, setBlogPosts] = useState([]);
@@ -15,7 +15,7 @@ export default function Blog() {
   return (
     <div className="d-flex flex-wrap">
       {blogPosts.map((blog) => (
-        <BlogPostCard key={blog.firebaseKey} blogObj={blog} />
+        <BlogPostCard key={blog.firebaseKey} blogObj={blog} className="blogCard" />
       ))}
     </div>
   );

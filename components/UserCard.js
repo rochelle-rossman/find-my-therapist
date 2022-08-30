@@ -2,23 +2,29 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import Card from 'react-bootstrap/Card';
-import ListGroup from 'react-bootstrap/ListGroup';
+import { Button } from 'react-bootstrap';
+import Link from 'next/link';
+import { deleteUser } from '../api/userData';
 
-function UserCard({ userObj }) {
+function UserCard({ userObj, onUpdate }) {
+  const deleteThisUser = () => {
+    if (window.confirm(`Delete ${userObj.name}?`)) {
+      deleteUser(userObj.firebaseKey).then(() => onUpdate());
+    }
+  };
   return (
     <Card style={{ width: '18rem' }}>
       <Card.Img variant="top" src={userObj?.photo} />
       <Card.Body>
         <Card.Title>{userObj?.name}</Card.Title>
-        <Card.Text>{ }</Card.Text>
+        <Card.Text>{userObj?.email}</Card.Text>
+        <Card.Text>{userObj?.phone}</Card.Text>
       </Card.Body>
-      <ListGroup className="list-group-flush">
-        <ListGroup.Item>{userObj?.email}</ListGroup.Item>
-        <ListGroup.Item>{userObj?.phone}</ListGroup.Item>
-      </ListGroup>
       <Card.Body>
-        <Card.Link href="#">Card Link</Card.Link>
-        <Card.Link href="#">Another Link</Card.Link>
+        <Button variant="danger" onClick={deleteThisUser}>DELETE</Button>
+        <Link href={`/user/${userObj.firebaseKey}`} passHref>
+          <Button variant="primary">VIEW</Button>
+        </Link>
       </Card.Body>
     </Card>
   );
@@ -30,8 +36,9 @@ UserCard.propTypes = {
     email: PropTypes.string,
     phone: PropTypes.string,
     photo: PropTypes.string,
+    firebaseKey: PropTypes.string,
   }).isRequired,
-  // onUpdate: PropTypes.func.isRequired,
+  onUpdate: PropTypes.func.isRequired,
 };
 
 export default UserCard;
