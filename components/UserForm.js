@@ -58,6 +58,9 @@ export default function UserForm({ obj }) {
       <FloatingLabel controlId="floatingInput1" label="Name" className="mb-3">
         <Form.Control type="text" placeholder="Enter Name" name="name" value={formInput.name} onChange={handleChange} required />
       </FloatingLabel>
+      <FloatingLabel controlId="floatingInput1" label="Date of Birth" className="mb-3">
+        <Form.Control type="date" placeholder="Enter Date of Birth" name="dateOfBirth" value={formInput.dateOfBirth} onChange={handleChange} required />
+      </FloatingLabel>
       <FloatingLabel controlId="floatingInput1" label="Email" className="mb-3">
         <Form.Control type="email" placeholder="Enter email address" name="email" value={formInput.email} onChange={handleChange} required />
       </FloatingLabel>
@@ -134,6 +137,7 @@ UserForm.propTypes = {
     phone: PropTypes.string,
     email: PropTypes.string,
     photo: PropTypes.string,
+    dateOfBirth: PropTypes.string,
   }),
 };
 
