@@ -21,9 +21,14 @@ function UserCard({ userObj, onUpdate }) {
         <Card.Text>{userObj?.phone}</Card.Text>
       </Card.Body>
       <Card.Body>
-        <Button variant="danger" onClick={deleteThisUser}>DELETE</Button>
+        <Button variant="danger" onClick={deleteThisUser}>
+          DELETE
+        </Button>
         <Link href={`/user/${userObj.firebaseKey}`} passHref>
           <Button variant="primary">VIEW</Button>
+        </Link>
+        <Link href={`/user/edit/${userObj.firebaseKey}`} passHref>
+          <Button variant="success">EDIT</Button>
         </Link>
       </Card.Body>
     </Card>
