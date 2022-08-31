@@ -41,7 +41,7 @@ const updateBlogPost = (blogObj) => new Promise((resolve, reject) => {
 });
 
 const deleteBlogPost = (firebaseKey) => new Promise((resolve, reject) => {
-  axios.delete(`${dbUrl}/blogPosts/${firebaseKey}`)
+  axios.delete(`${dbUrl}/blogPosts/${firebaseKey}.json`)
     .then(() => {
       getBlogPosts().then(resolve);
     }).catch(reject);

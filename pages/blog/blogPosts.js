@@ -15,7 +15,7 @@ export default function Blog() {
   return (
     <div className="d-flex flex-wrap">
       {blogPosts.map((blog) => (
-        <BlogPostCard key={blog.firebaseKey} blogObj={blog} className="blogCard" />
+        <BlogPostCard key={blog.firebaseKey} blogObj={blog} onUpdate={getAllBlogs} className="blogCard" />
       ))}
     </div>
   );

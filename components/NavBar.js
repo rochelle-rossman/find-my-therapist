@@ -2,7 +2,6 @@
 /* eslint-disable jsx-a11y/anchor-is-valid */
 import React from 'react';
 import Link from 'next/link';
-import { signOut } from '../utils/auth';
 import { useAuth } from '../utils/context/authContext';
 
 export default function NavBar() {
@@ -46,9 +45,6 @@ export default function NavBar() {
                 <a className="nav-link">Messages</a>
               </Link>
             </li>
-            <button type="button" className="btn btn-danger" onClick={signOut}>
-              Sign Out
-            </button>
             <Link passHref href="/profile">
               <img className="userIcon" src={user.photoURL} alt={user.displayName} />
             </Link>
