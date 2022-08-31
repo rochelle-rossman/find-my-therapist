@@ -3,20 +3,33 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { Card, Button } from 'react-bootstrap';
+import Link from 'next/link';
+import { deleteBlogPost } from '../api/blogData';
 
-function BlogPostCard({ blogObj }) {
+function BlogPostCard({ blogObj, onUpdate }) {
+  const deleteThisPost = () => {
+    if (window.confirm(`Delete ${blogObj.title}?`)) {
+      deleteBlogPost(blogObj.firebaseKey).then(() => onUpdate());
+    }
+  };
   return (
     <>
       <div className="mb-3 d-flex align-items-center">
-        <Card style={{ width: '50rem' }}>
+        <Card style={{ width: '18rem' }}>
           <Card.Img className="blogCardPhoto" src={blogObj.photo} />
           <Card.Body>
             <Card.Title>{blogObj.title}</Card.Title>
             <Card.Text className="contentPreview">{blogObj.content}</Card.Text>
             <p>{blogObj.timeStamp}</p>
-            <Button variant="danger">DELETE</Button>
-            <Button variant="primary">EDIT</Button>
-            <Button variant="success">READ MORE</Button>
+            <Button variant="danger" onClick={deleteThisPost}>
+              DELETE
+            </Button>
+            <Link href={`/blog/edit/${blogObj.firebaseKey}`} passHref>
+              <Button variant="primary">EDIT</Button>
+            </Link>
+            <Link href={`/blog/${blogObj.firebaseKey}`} passHref>
+              <Button variant="success">READ MORE</Button>
+            </Link>
           </Card.Body>
         </Card>
       </div>
@@ -30,7 +43,9 @@ BlogPostCard.propTypes = {
     photo: PropTypes.string,
     content: PropTypes.string,
     timeStamp: PropTypes.string,
+    firebaseKey: PropTypes.string,
   }).isRequired,
+  onUpdate: PropTypes.func.isRequired,
 };
 
 export default BlogPostCard;

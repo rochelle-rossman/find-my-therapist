@@ -8,7 +8,7 @@ function User({
 }) {
   return (
     <div>
-      <Card style={{ width: '18rem' }} className="profile-card">
+      <Card style={{ width: '27rem' }} className="profile-card">
         <Card.Img variant="top" src={image} alt={name} className="profile-img" />
         <Card.Body>
           <Card.Title>{name}</Card.Title>

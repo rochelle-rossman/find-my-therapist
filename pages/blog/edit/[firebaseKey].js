@@ -1,18 +1,18 @@
 import { useRouter } from 'next/router';
 import React, { useState, useEffect } from 'react';
-import { getSingleUser } from '../../../api/userData';
-import UserForm from '../../../components/UserForm';
+import { getSingleBlogPost } from '../../../api/blogData';
+import BlogForm from '../../../components/BlogForm';
 
-export default function EditUser() {
-  const [editUserObj, setEditUserObj] = useState({});
+export default function EditBlog() {
+  const [editBlogObj, setEditBlogObj] = useState({});
   const router = useRouter();
   const { firebaseKey } = router.query;
 
   useEffect(() => {
-    getSingleUser(firebaseKey).then(setEditUserObj);
+    getSingleBlogPost(firebaseKey).then(setEditBlogObj);
   }, [firebaseKey]);
 
   return (
-    <UserForm obj={editUserObj} />
+    <BlogForm obj={editBlogObj} />
   );
 }

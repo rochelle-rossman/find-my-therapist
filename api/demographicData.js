@@ -16,6 +16,12 @@ const getGenders = () => new Promise((resolve, reject) => {
     .catch((error) => reject(error));
 });
 
+const getSingleGender = (firebaseKey) => new Promise((resolve, reject) => {
+  axios.get(`${dbUrl}/genders.json?orderBy="firebaseKey"&equalTo="${firebaseKey}"`)
+    .then((response) => resolve(response.data))
+    .catch((error) => reject(error));
+});
+
 const getSexualOrientations = () => new Promise((resolve, reject) => {
   axios
     .get(`${dbUrl}/sexualOrientations.json`)
@@ -56,5 +62,5 @@ const getEthnicities = () => new Promise((resolve, reject) => {
 });
 
 export {
-  getEthnicities, getGenders, getPronouns, getSexualOrientations,
+  getEthnicities, getGenders, getPronouns, getSexualOrientations, getSingleGender,
 };

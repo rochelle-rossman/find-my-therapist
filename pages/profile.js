@@ -12,7 +12,7 @@ export default function Profile() {
         <User image={user.photoURL} email={user.email} name={user.displayName} lastLogin={user.metadata.lastSignInTime} />
       </div>
       <div className="sign-out-btn">
-        <Button type="button" onClick={signOut}>
+        <Button type="button" variant="danger" onClick={signOut}>
           Sign Out
         </Button>
       </div>
