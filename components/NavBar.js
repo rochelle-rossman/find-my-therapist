@@ -36,12 +36,12 @@ export default function NavBar() {
               </Link>
             </li>
             <li className="nav-item">
-              <Link passHref href="/">
+              <Link passHref href="">
                 <a className="nav-link">My Saved Therapists</a>
               </Link>
             </li>
             <li className="nav-item">
-              <Link passHref href="/">
+              <Link passHref href="">
                 <a className="nav-link">Messages</a>
               </Link>
             </li>

@@ -1,12 +1,14 @@
-import { getSingleGender, getSingleSexualOrientation } from './demographicData';
+import { getSingleBlogPost } from './blogData';
 import { getSingleUser } from './userData';
 
-const viewUserDetails = (userFirebaseKey) => new Promise((resolve, reject) => {
-  getSingleUser(userFirebaseKey)
-    .then((userObj) => (Promise.all([getSingleGender(userObj.genderId), getSingleSexualOrientation(userObj.sexualOrientation)])
-      .then(([gender, sexualOrientation]) => {
-        resolve({ ...userObj, gender, sexualOrientation });
-      }))).catch((error) => reject(error));
+const viewBlogDetails = (blogFirebaseKey) => new Promise((resolve, reject) => {
+  getSingleBlogPost(blogFirebaseKey)
+    .then((blogObject) => {
+      getSingleUser(blogObject.therapistId)
+        .then((userObject) => {
+          resolve({ userObject, ...blogObject });
+        });
+    }).catch((error) => reject(error));
 });
 
-export default viewUserDetails;
+export default viewBlogDetails;
