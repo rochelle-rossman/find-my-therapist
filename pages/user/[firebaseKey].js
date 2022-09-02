@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useRouter } from 'next/router';
-import viewUserDetails from '../../api/mergedData';
+import { getSingleUser } from '../../api/userData';
 
 export default function ViewUser() {
   const [userDetails, setUserDetails] = useState({});
@@ -9,12 +9,12 @@ export default function ViewUser() {
   const { firebaseKey } = router.query;
 
   useEffect(() => {
-    viewUserDetails(firebaseKey).then(setUserDetails);
+    getSingleUser(firebaseKey).then(setUserDetails);
   }, [firebaseKey]);
   return (
     <>
       <div>{userDetails.name}</div>
-      <div>{userDetails.genderObject?.gender}</div>
+      <div>{userDetails.gender}</div>
     </>
   );
 }
