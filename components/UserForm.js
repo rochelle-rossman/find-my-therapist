@@ -13,6 +13,7 @@ const initialState = {
   phone: '',
   email: '',
   isTherapist: false,
+  bio: '',
 };
 
 export default function UserForm({ obj }) {
@@ -71,20 +72,20 @@ export default function UserForm({ obj }) {
         <Form.Control type="text" placeholder="Enter a photo URL" name="photo" value={formInput.photo} onChange={handleChange} required />
       </FloatingLabel>
       <FloatingLabel controlId="floatingSelect" label="Gender">
-        <Form.Select aria-label="Gender" name="genderId" onChange={handleChange} className="mb-3" required>
+        <Form.Select aria-label="Gender" name="gender" onChange={handleChange} className="mb-3" required>
           <option value="">Select Gender Identity</option>
           {genders.map((gender) => (
-            <option key={gender.firebaseKey} value={gender.firebaseKey} selected={obj.genderId === gender.firebaseKey}>
+            <option key={gender.firebaseKey} value={gender.gender} selected={obj.gender === gender.gender}>
               {gender.gender}
             </option>
           ))}
         </Form.Select>
       </FloatingLabel>
       <FloatingLabel controlId="floatingSelect" label="Pronouns">
-        <Form.Select aria-label="Pronouns" name="pronounId" onChange={handleChange} className="mb-3" required>
+        <Form.Select aria-label="Pronouns" name="pronouns" onChange={handleChange} className="mb-3" required>
           <option value="">Select Preferred Pronouns</option>
           {pronouns.map((pronoun) => (
-            <option key={pronoun.firebaseKey} value={pronoun.firebaseKey} selected={obj.pronounId === pronoun.firebaseKey}>
+            <option key={pronoun.firebaseKey} value={pronoun.pronoun} selected={obj.pronouns === pronoun.pronoun}>
               {pronoun.pronoun}
             </option>
           ))}
@@ -94,22 +95,25 @@ export default function UserForm({ obj }) {
         <Form.Select aria-label="Sexual Orientation" name="sexualOrientation" onChange={handleChange} className="mb-3" required>
           <option value="">Select Sexual Orientation</option>
           {sexualOrientations.map((sexualOrientation) => (
-            <option key={sexualOrientation.firebaseKey} value={sexualOrientation.firebaseKey} selected={obj.sexualOrientation === sexualOrientation.firebaseKey}>
+            <option key={sexualOrientation.firebaseKey} value={sexualOrientation.sexualOrientation} selected={obj.sexualOrientation === sexualOrientation.sexualOrientation}>
               {sexualOrientation.sexualOrientation}
             </option>
           ))}
         </Form.Select>
       </FloatingLabel>
       <FloatingLabel controlId="floatingSelect" label="Race/Ethnicity">
-        <Form.Select aria-label="Ethnicity" name="ethnicityId" onChange={handleChange} className="mb-3" required>
+        <Form.Select aria-label="Ethnicity" name="ethnicity" onChange={handleChange} className="mb-3" required>
           <option value="">Select Race/Ethnicity</option>
           {ethnicities.map((ethnicity) => (
-            <option key={ethnicity.firebaseKey} value={ethnicity.firebaseKey} selected={obj.ethnicityId === ethnicity.firebaseKey}>
+            <option key={ethnicity.firebaseKey} value={ethnicity.ethnicity} selected={obj.ethnicity === ethnicity.firebaseKey}>
               {ethnicity.ethnicity}
             </option>
           ))}
         </Form.Select>
       </FloatingLabel>
+      <Form.Group className="mb-3" controlId="exampleForm.ControlTextarea1">
+        <Form.Control as="textarea" rows={12} placeholder="Bio" name="bio" value={formInput.bio} onChange={handleChange} />
+      </Form.Group>
       <Form.Check
         type="switch"
         id="therapist"
@@ -128,9 +132,9 @@ export default function UserForm({ obj }) {
 UserForm.propTypes = {
   obj: PropTypes.shape({
     firebaseKey: PropTypes.string,
-    genderId: PropTypes.string,
-    pronounId: PropTypes.string,
-    ethnicityId: PropTypes.string,
+    gender: PropTypes.string,
+    pronouns: PropTypes.string,
+    ethnicity: PropTypes.string,
     sexualOrientation: PropTypes.string,
     isTherapist: PropTypes.bool,
     name: PropTypes.string,
@@ -138,6 +142,7 @@ UserForm.propTypes = {
     email: PropTypes.string,
     photo: PropTypes.string,
     dateOfBirth: PropTypes.string,
+    bio: PropTypes.string,
   }),
 };
 

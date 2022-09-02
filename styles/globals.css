@@ -37,3 +37,7 @@ body {
   height: 18rem;
   width: 18rem;
 }
+
+.noShow{
+  display: none;
+}

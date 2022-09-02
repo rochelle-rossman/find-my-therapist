@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import { useEffect, useState } from 'react';
 import { getUsers } from '../api/userData';
 import UserCard from '../components/UserCard';

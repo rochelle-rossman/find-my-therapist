@@ -51,7 +51,7 @@ function BlogForm({ obj }) {
         <Form.Control type="text" placeholder="Photo URL" name="photo" value={formInput.photo} onChange={handleChange} required />
       </FloatingLabel>
       <Form.Group className="mb-3" controlId="exampleForm.ControlTextarea1">
-        <Form.Control as="textarea" rows={12} placeholder="Content" name="content" value={formInput.content} onChange={handleChange} />
+        <Form.Control as="textarea" rows={12} placeholder="Content" name="content" value={formInput.content} onChange={handleChange} required />
       </Form.Group>
       <Button type="submit">{obj.firebaseKey ? 'Update' : 'Add'} Blog Post</Button>
     </Form>
