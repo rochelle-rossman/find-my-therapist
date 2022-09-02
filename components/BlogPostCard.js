@@ -14,8 +14,8 @@ function BlogPostCard({ blogObj, onUpdate }) {
   };
   return (
     <>
-      <div className="mb-3 d-flex align-items-center">
-        <Card style={{ width: '18rem' }}>
+      <div className="mb-3 d-flex">
+        <Card style={{ width: '18rem', margin: '1rem' }}>
           <Card.Img className="blogCardPhoto" src={blogObj.photo} />
           <Card.Body>
             <Card.Title>{blogObj.title}</Card.Title>

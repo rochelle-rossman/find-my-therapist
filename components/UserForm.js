@@ -105,7 +105,7 @@ export default function UserForm({ obj }) {
         <Form.Select aria-label="Ethnicity" name="ethnicity" onChange={handleChange} className="mb-3" required>
           <option value="">Select Race/Ethnicity</option>
           {ethnicities.map((ethnicity) => (
-            <option key={ethnicity.firebaseKey} value={ethnicity.ethnicity} selected={obj.ethnicity === ethnicity.firebaseKey}>
+            <option key={ethnicity.firebaseKey} value={ethnicity.ethnicity} selected={obj.ethnicity === ethnicity.ethnicity}>
               {ethnicity.ethnicity}
             </option>
           ))}

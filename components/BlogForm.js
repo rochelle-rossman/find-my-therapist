@@ -4,6 +4,7 @@ import { useRouter } from 'next/router';
 import { Form, FloatingLabel, Button } from 'react-bootstrap';
 import { useAuth } from '../utils/context/authContext';
 import { createBlogPost, getBlogPosts, updateBlogPost } from '../api/blogData';
+import { getUsers } from '../api/userData';
 
 const initialState = {
   title: '',
@@ -13,11 +14,13 @@ const initialState = {
 
 function BlogForm({ obj }) {
   const [formInput, setFormInput] = useState(initialState);
+  const [authors, setAuthors] = useState([]);
   const router = useRouter();
   const { user } = useAuth();
 
   useEffect(() => {
     getBlogPosts();
+    getUsers().then(setAuthors);
     if (obj.firebaseKey) setFormInput(obj);
   }, [obj, user]);
 
@@ -34,7 +37,7 @@ function BlogForm({ obj }) {
     if (obj.firebaseKey) {
       updateBlogPost(formInput).then(() => router.push('/blog/blogPosts'));
     } else {
-      const payload = { ...formInput, uid: user.uid, timeStamp: new Date().toLocaleString() };
+      const payload = { ...formInput, timeStamp: new Date().toLocaleString() };
       createBlogPost(payload).then(() => {
         router.push('/blog/blogPosts');
       });
@@ -53,6 +56,17 @@ function BlogForm({ obj }) {
       <Form.Group className="mb-3" controlId="exampleForm.ControlTextarea1">
         <Form.Control as="textarea" rows={12} placeholder="Content" name="content" value={formInput.content} onChange={handleChange} required />
       </Form.Group>
+      <FloatingLabel controlId="floatingSelect" label="Author">
+        <Form.Select aria-label="Gender" name="therapistId" onChange={handleChange} className="mb-3" required>
+          {authors.map((author) => (
+            (user.uid === author.uid ? (
+              <option key={author.firebaseKey} value={author.firebaseKey} selected={obj.name === author.name}>
+                {author.name}
+              </option>
+            ) : '')
+          ))}
+        </Form.Select>
+      </FloatingLabel>
       <Button type="submit">{obj.firebaseKey ? 'Update' : 'Add'} Blog Post</Button>
     </Form>
   );
