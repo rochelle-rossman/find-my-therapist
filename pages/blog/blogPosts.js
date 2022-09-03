@@ -7,7 +7,10 @@ export default function Blog() {
   const [blogPosts, setBlogPosts] = useState([]);
   const [filteredBlogs, setFilteredBlogs] = useState([]);
   const getAllBlogs = () => {
-    getBlogPosts().then(setBlogPosts);
+    getBlogPosts().then((blogArray) => {
+      setBlogPosts(blogArray);
+      setFilteredBlogs(blogArray);
+    });
   };
 
   useEffect(() => {
