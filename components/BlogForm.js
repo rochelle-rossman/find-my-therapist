@@ -37,7 +37,7 @@ function BlogForm({ obj }) {
     if (obj.firebaseKey) {
       updateBlogPost(formInput).then(() => router.push('/blog/blogPosts'));
     } else {
-      const payload = { ...formInput, timeStamp: new Date().toLocaleString() };
+      const payload = { ...formInput, timeStamp: new Date().toLocaleString(), uid: user.uid };
       createBlogPost(payload).then(() => {
         router.push('/blog/blogPosts');
       });

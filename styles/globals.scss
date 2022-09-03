@@ -47,6 +47,11 @@ a {
   display: none;
 }
 
+.filterButtons {
+  display: flex;
+  justify-content: center;
+}
+
 // COPIED SCSS FROM CODEPEN
 $main-green: #79dd09 !default;
 $main-green-rgb-015: rgba(121, 221, 9, 0.1) !default;

@@ -23,6 +23,8 @@ function UserCard({ userObj }) {
         <Link href={`/user/${userObj.firebaseKey}`} passHref>
           <Button variant="primary">VIEW</Button>
         </Link>
+        <Button variant="primary">MESSAGE</Button>
+        <Button variant="primary">SAVE</Button>
         <Link href={`/user/edit/${userObj.firebaseKey}`} passHref>
           <Button variant="success" className={userObj.uid !== user.uid ? 'noShow' : ''}>
             EDIT
