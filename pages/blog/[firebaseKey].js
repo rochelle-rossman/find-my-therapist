@@ -16,7 +16,7 @@ export default function ViewBlog() {
   return (
     <div className="mt-5 d-flex flex-wrap justify-content-center">
       <div>
-        <img src={blogDetails.photo} alt={blogDetails.title} style={{ width: 'auto' }} />
+        <img src={blogDetails.photo} alt={blogDetails.title} />
       </div>
       <div className="text-black ms-5 details">
         <h3>{blogDetails.title}</h3>

@@ -1,11 +1,8 @@
-/* eslint-disable @next/next/no-img-element */
 /* eslint-disable jsx-a11y/anchor-is-valid */
 import React from 'react';
 import Link from 'next/link';
-import { useAuth } from '../utils/context/authContext';
 
 export default function NavBar() {
-  const { user } = useAuth();
   return (
     <nav className="navbar navbar-expand-md navbar-dark bg-dark">
       <div className="container-fluid">
@@ -46,7 +43,7 @@ export default function NavBar() {
               </Link>
             </li>
             <Link passHref href="/profile">
-              <img className="userIcon" src={user.photoURL} alt={user.displayName} />
+              <a className="nav-link">Profile</a>
             </Link>
           </ul>
         </div>

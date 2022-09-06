@@ -1,8 +1,7 @@
-/* eslint-disable react/style-prop-object */
 /* eslint-disable @next/next/no-img-element */
 import React from 'react';
 import PropTypes from 'prop-types';
-import { Card, Button } from 'react-bootstrap';
+import { Button } from 'react-bootstrap';
 import Link from 'next/link';
 import { deleteBlogPost } from '../api/blogData';
 import { useAuth } from '../utils/context/authContext';
@@ -16,27 +15,42 @@ function BlogPostCard({ blogObj, onUpdate }) {
   };
   return (
     <>
-      <div className="mb-3 d-flex">
-        <Card style={{ width: '18rem', margin: '1rem' }}>
-          <Card.Img className="blogCardPhoto" src={blogObj.photo} />
-          <Card.Body>
-            <Card.Title>{blogObj.title}</Card.Title>
-            <Card.Text className="contentPreview">{blogObj.content}</Card.Text>
-            <p>{blogObj.timeStamp}</p>
-            <Button variant="danger" className={blogObj.uid !== user.uid ? 'noShow' : ''} onClick={deleteThisPost}>
-              DELETE
-            </Button>
-            <Link href={`/blog/edit/${blogObj.firebaseKey}`} passHref>
-              <Button variant="primary" className={blogObj.uid !== user.uid ? 'noShow' : ''}>
-                EDIT
-              </Button>
-            </Link>
-            <Link href={`/blog/${blogObj.firebaseKey}`} passHref>
-              <Button variant="success">READ MORE</Button>
-            </Link>
-          </Card.Body>
-        </Card>
-      </div>
+      <section className="light">
+        <div className="container py-2">
+          <article className="postcard light blue">
+            <a className="postcard__img_link" href={`/blog/${blogObj.firebaseKey}`}>
+              <img className="postcard__img" src={blogObj.photo} alt={blogObj.title} />
+            </a>
+            <div className="postcard__text t-dark">
+              <h2 className="postcard__title blue">
+                <a href={`/blog/${blogObj.firebaseKey}`}>{blogObj.title}</a>
+              </h2>
+              <div className="postcard__subtitle small">
+                <time dateTime={blogObj.timeStamp}>
+                  <i className="fas fa-calendar-alt mr-2" />
+                  {blogObj.timeStamp}
+                </time>
+              </div>
+              <div className="postcard__bar" />
+              <div className="contentPreview">{blogObj.content}</div>
+              <ul className="postcard__tagbox">
+                <li className={blogObj.uid !== user.uid ? 'noShow' : 'tag__item'}>
+                  <Button variant="link" onClick={deleteThisPost}>
+                    DELETE
+                  </Button>
+                </li>
+                <li className={blogObj.uid !== user.uid ? 'noShow' : 'tag__item'}>
+                  <Link href={`/blog/edit/${blogObj.firebaseKey}`} passHref>
+                    <Button variant="link">
+                      EDIT
+                    </Button>
+                  </Link>
+                </li>
+              </ul>
+            </div>
+          </article>
+        </div>
+      </section>
     </>
   );
 }

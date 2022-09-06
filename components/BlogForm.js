@@ -57,10 +57,10 @@ function BlogForm({ obj }) {
         <Form.Control as="textarea" rows={12} placeholder="Content" name="content" value={formInput.content} onChange={handleChange} required />
       </Form.Group>
       <FloatingLabel controlId="floatingSelect" label="Author">
-        <Form.Select aria-label="Gender" name="therapistId" onChange={handleChange} className="mb-3" required>
+        <Form.Select aria-label="authorId" name="authorId" onChange={handleChange} className="mb-3" required>
           {authors.map((author) => (
             (user.uid === author.uid ? (
-              <option key={author.firebaseKey} value={author.firebaseKey} selected={obj.name === author.name}>
+              <option key={author.firebaseKey} value={author.firebaseKey} selected={obj.authorId === author.firebaseKey}>
                 {author.name}
               </option>
             ) : '')
@@ -78,6 +78,7 @@ BlogForm.propTypes = {
     image: PropTypes.string,
     firebaseKey: PropTypes.string,
     photo: PropTypes.string,
+    authorId: PropTypes.string,
   }),
 };
 

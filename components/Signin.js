@@ -1,3 +1,4 @@
+import Link from 'next/link';
 import React from 'react';
 import { signIn } from '../utils/auth';
 
@@ -14,9 +15,11 @@ function Signin() {
     >
       <h1>Hi there!</h1>
       <p>Click the button below to login!</p>
-      <button type="button" className="btn btn-primary btn-lg copy-btn" onClick={signIn}>
-        Sign In
-      </button>
+      <Link href="/user/new" passHref>
+        <button type="button" className="btn btn-primary btn-lg copy-btn" onClick={signIn}>
+          Sign In
+        </button>
+      </Link>
     </div>
   );
 }
