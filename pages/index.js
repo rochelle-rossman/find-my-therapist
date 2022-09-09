@@ -1,7 +1,7 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import { useEffect, useState } from 'react';
 import { Button, Dropdown } from 'react-bootstrap';
-import DropdownItem from 'react-bootstrap/esm/DropdownItem';
+// import DropdownItem from 'react-bootstrap/esm/DropdownItem';
 import {
   getUsers, getUsersByEthnicity, getUsersByGender, getUsersByPronouns, getUsersBySexualOrientation,
 } from '../api/userData';
@@ -107,9 +107,9 @@ function Home() {
           </Dropdown.Toggle>
           <Dropdown.Menu>
             {pronouns.map((pronoun) => (
-              <DropdownItem key={pronoun.firebaseKey} value={pronoun.pronoun} onClick={handleClick} name="pronoun">
+              <Dropdown.Item key={pronoun.firebaseKey} value={pronoun.pronoun} onClick={handleClick} name="pronoun">
                 {pronoun.pronoun}
-              </DropdownItem>
+              </Dropdown.Item>
             ))}
           </Dropdown.Menu>
         </Dropdown>
@@ -120,9 +120,9 @@ function Home() {
           </Dropdown.Toggle>
           <Dropdown.Menu>
             {sexualOrientations.map((sexualOrientation) => (
-              <DropdownItem key={sexualOrientation.firebaseKey} value={sexualOrientation.sexualOrientation} onClick={handleClick} name="sexualOrientation">
+              <Dropdown.Item key={sexualOrientation.firebaseKey} value={sexualOrientation.sexualOrientation} onClick={handleClick} name="sexualOrientation">
                 {sexualOrientation.sexualOrientation}
-              </DropdownItem>
+              </Dropdown.Item>
             ))}
           </Dropdown.Menu>
         </Dropdown>
@@ -133,9 +133,9 @@ function Home() {
           </Dropdown.Toggle>
           <Dropdown.Menu>
             {ethnicities.map((ethnicity) => (
-              <DropdownItem key={ethnicity.firebaseKey} value={ethnicity.ethnicity} onClick={handleClick} name="ethnicity">
+              <Dropdown.Item key={ethnicity.firebaseKey} value={ethnicity.ethnicity} onClick={handleClick} name="ethnicity">
                 {ethnicity.ethnicity}
-              </DropdownItem>
+              </Dropdown.Item>
             ))}
           </Dropdown.Menu>
         </Dropdown>

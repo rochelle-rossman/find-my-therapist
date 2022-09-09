@@ -124,7 +124,7 @@ export default function UserForm({ obj }) {
           isTherapist: e.target.checked,
         }))}
       />
-      <Button type="submit">{obj.firebaseKey ? 'Update' : 'Add'} User</Button>
+      <Button type="submit">{obj.firebaseKey ? 'Update' : 'Create'} Profile</Button>
     </Form>
   );
 }

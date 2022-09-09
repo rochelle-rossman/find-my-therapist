@@ -37,11 +37,16 @@ export default function Profile() {
           </Button>
         </>
       ) : (
-        <Link passHref href="/user/new">
-          <Button type="button" variant="outline-success">
-            Create Profile
+        <>
+          <Link passHref href="/user/new">
+            <Button type="button" variant="outline-success">
+              Create Profile
+            </Button>
+          </Link>
+          <Button type="button" variant="outline-danger" onClick={logout}>
+            Sign Out
           </Button>
-        </Link>
+        </>
       )}
     </div>
   );
