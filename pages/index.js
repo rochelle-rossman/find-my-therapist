@@ -86,10 +86,10 @@ function Home() {
   };
 
   return (
-    <>
+    <div className="container py-2">
       <div className="filterButtons">
         <Dropdown>
-          <Dropdown.Toggle variant="success" id="dropdown-basic">
+          <Dropdown.Toggle variant="light" id="dropdown-basic">
             Gender
           </Dropdown.Toggle>
           <Dropdown.Menu>
@@ -102,7 +102,7 @@ function Home() {
         </Dropdown>
 
         <Dropdown>
-          <Dropdown.Toggle variant="success" id="dropdown-basic">
+          <Dropdown.Toggle variant="light" id="dropdown-basic">
             Pronouns
           </Dropdown.Toggle>
           <Dropdown.Menu>
@@ -115,7 +115,7 @@ function Home() {
         </Dropdown>
 
         <Dropdown>
-          <Dropdown.Toggle variant="success" id="dropdown-basic">
+          <Dropdown.Toggle variant="light" id="dropdown-basic">
             Sexual Orientation
           </Dropdown.Toggle>
           <Dropdown.Menu>
@@ -128,7 +128,7 @@ function Home() {
         </Dropdown>
 
         <Dropdown>
-          <Dropdown.Toggle variant="success" id="dropdown-basic">
+          <Dropdown.Toggle variant="light" id="dropdown-basic">
             Race/Ethnicity
           </Dropdown.Toggle>
           <Dropdown.Menu>
@@ -139,14 +139,12 @@ function Home() {
             ))}
           </Dropdown.Menu>
         </Dropdown>
-        <Button onClick={handleClick} value="clear">Clear Filters</Button>
+        <Button variant="light" onClick={handleClick} value="clear">
+          Clear Filters
+        </Button>
       </div>
-      <div className="therapistCards">
-        {users.map((client) => (
-          <UserCard key={client.firebaseKey} userObj={client} />
-        ))}
-      </div>
-    </>
+      <div className="therapistCards">{users.map((client) => (client.isTherapist ? <UserCard key={client.firebaseKey} userObj={client} onUpdate={getAllUsers} /> : ''))}</div>
+    </div>
   );
 }
 

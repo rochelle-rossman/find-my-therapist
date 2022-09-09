@@ -4,13 +4,21 @@ import PropTypes from 'prop-types';
 
 function User({ userObj }) {
   return (
-    <div>
-      <img src={userObj.photo} alt={userObj.name} />
-      <h1>{userObj.name}</h1>
-      <h5>{userObj.pronouns}</h5>
-      <h2>{userObj.email}</h2>
-      <h3>{userObj.phone}</h3>
-    </div>
+    <section>
+      <div className="container py-2">
+        <article className="postcard light blue">
+          <img className="postcard__img" src={userObj.photo} alt={userObj.name} />
+          <div className="postcard__text t-dark">
+            <h2 className="postcard__title blue">{userObj.name}</h2>
+            <div className="postcard__subtitle small">
+              <h5>{userObj.pronouns}</h5>
+              <h6>Email:{userObj.email}</h6>
+            </div>
+            <div className="postcard__bar" />
+          </div>
+        </article>
+      </div>
+    </section>
   );
 }
 User.propTypes = {

@@ -1,46 +1,13 @@
 @import 'bootstrap/dist/css/bootstrap.css';
 @import url("https://fonts.googleapis.com/css2?family=Baloo+2&display=swap");
 
-html,
-body {
-  padding: 0;
-  margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen,
-    Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
-}
-
-a {
-  color: inherit;
-  text-decoration: none;
-}
-
-* {
-  box-sizing: border-box;
-}
-
-
-.userIcon {
-  border-radius: 50%;
-  height: 40px;
-}
-
 .contentPreview {
-  white-space: nowrap;
-  width: 16rem;
-  overflow: hidden;
+  display: block;
   text-overflow: ellipsis;
-}
-
-.therapistCards {
-  display: flex;
-  flex-direction: row;
-  flex-wrap: wrap;
-}
-
-
-.blogCardPhoto {
-  height: 18rem;
-  width: 18rem;
+  word-wrap: break-word;
+  overflow: hidden;
+  max-height: 5.4em;
+  line-height: 1.8em;
 }
 
 .noShow {
@@ -50,6 +17,7 @@ a {
 .filterButtons {
   display: flex;
   justify-content: center;
+  flex-wrap: wrap;
 }
 
 // COPIED SCSS FROM CODEPEN
@@ -77,7 +45,7 @@ body {
 
 
 .light {
-  background: #f3f5f7;
+  background: white;
 }
 
 a,
@@ -139,7 +107,7 @@ a:hover {
   .postcard__img {
     max-height: 180px;
     width: 100%;
-    object-fit: cover;
+    object-fit: contain;
     position: relative;
   }
 
@@ -230,8 +198,8 @@ a:hover {
     }
 
     .postcard__text {
-      padding: 3rem;
-      width: 100%;
+      padding: 4rem;
+      width: 90%;
     }
 
     .media.postcard__text:before {
@@ -283,11 +251,6 @@ a:hover {
     width: 55px;
   }
 
-  .postcard.dark {
-    .postcard__text:before {
-      background: #18151f;
-    }
-  }
 
   .postcard.light {
     .postcard__text:before {

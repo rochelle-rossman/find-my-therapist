@@ -3,13 +3,14 @@ import PropTypes from 'prop-types';
 import { useRouter } from 'next/router';
 import { Form, FloatingLabel, Button } from 'react-bootstrap';
 import { useAuth } from '../utils/context/authContext';
-import { createBlogPost, getBlogPosts, updateBlogPost } from '../api/blogData';
+import { createBlogPost, updateBlogPost } from '../api/blogData';
 import { getUsers } from '../api/userData';
 
 const initialState = {
   title: '',
   photo: '',
   content: '',
+  therapistId: '',
 };
 
 function BlogForm({ obj }) {
@@ -19,7 +20,6 @@ function BlogForm({ obj }) {
   const { user } = useAuth();
 
   useEffect(() => {
-    getBlogPosts();
     getUsers().then(setAuthors);
     if (obj.firebaseKey) setFormInput(obj);
   }, [obj, user]);
@@ -30,6 +30,7 @@ function BlogForm({ obj }) {
       ...prevState,
       [name]: value,
     }));
+    console.warn(formInput);
   };
 
   const handleSubmit = (e) => {
@@ -57,14 +58,15 @@ function BlogForm({ obj }) {
         <Form.Control as="textarea" rows={12} placeholder="Content" name="content" value={formInput.content} onChange={handleChange} required />
       </Form.Group>
       <FloatingLabel controlId="floatingSelect" label="Author">
-        <Form.Select aria-label="Gender" name="therapistId" onChange={handleChange} className="mb-3" required>
-          {authors.map((author) => (
-            (user.uid === author.uid ? (
-              <option key={author.firebaseKey} value={author.firebaseKey} selected={obj.name === author.name}>
-                {author.name}
-              </option>
-            ) : '')
-          ))}
+        <Form.Select aria-label="therapistId" name="therapistId" onChange={handleChange} className="mb-3" required>
+          <option>Select Account</option>
+          {authors.map((author) => (user.uid === author.uid ? (
+            <option key={author.firebaseKey} value={author.firebaseKey} selected={obj.therapistId === author.firebaseKey}>
+              {author.name}
+            </option>
+          ) : (
+            ''
+          )))}
         </Form.Select>
       </FloatingLabel>
       <Button type="submit">{obj.firebaseKey ? 'Update' : 'Add'} Blog Post</Button>
@@ -78,6 +80,7 @@ BlogForm.propTypes = {
     image: PropTypes.string,
     firebaseKey: PropTypes.string,
     photo: PropTypes.string,
+    therapistId: PropTypes.string,
   }),
 };
 
