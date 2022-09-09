@@ -17,7 +17,7 @@ export default function ViewUser() {
   }, [firebaseKey]);
   return (
     <>
-      <Card>
+      <Card style={{ width: '30rem', margin: '10px' }}>
         <Card.Img variant="top" src={userDetails?.photo} />
         <Card.Body>
           <Card.Title>{userDetails?.name}</Card.Title>

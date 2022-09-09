@@ -139,13 +139,11 @@ function Home() {
             ))}
           </Dropdown.Menu>
         </Dropdown>
-        <Button variant="light" onClick={handleClick} value="clear">Clear Filters</Button>
+        <Button variant="light" onClick={handleClick} value="clear">
+          Clear Filters
+        </Button>
       </div>
-      <div className="therapistCards">
-        {users.map((client) => (
-          <UserCard key={client.firebaseKey} userObj={client} onUpdate={getAllUsers} />
-        ))}
-      </div>
+      <div className="therapistCards">{users.map((client) => (client.isTherapist ? <UserCard key={client.firebaseKey} userObj={client} onUpdate={getAllUsers} /> : ''))}</div>
     </div>
   );
 }
