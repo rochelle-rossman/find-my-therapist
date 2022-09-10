@@ -1,8 +1,36 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 /* eslint-disable jsx-a11y/anchor-is-valid */
-import React from 'react';
+import React, { useEffect } from 'react';
 import Link from 'next/link';
+import { useRouter } from 'next/router';
+import { Button } from 'react-bootstrap';
+import { useAuth } from '../utils/context/authContext';
+import { getUsersByUid } from '../api/userData';
+import { signIn, signOut } from '../utils/auth';
 
 export default function NavBar() {
+  const router = useRouter();
+  const { user } = useAuth();
+
+  const checkUserProfile = () => {
+    if (user.uid) {
+      getUsersByUid(user.uid).then((userObj) => {
+        if (!Object.values(userObj).length) {
+          router.push('/user/new');
+        }
+      });
+    }
+  };
+
+  const signOutUser = () => {
+    router.push('/');
+    signOut();
+  };
+
+  useEffect(() => {
+    checkUserProfile();
+  }, [user]);
+
   return (
     <nav className="navbar navbar-expand-md navbar-dark bg-dark">
       <div className="container-fluid">
@@ -28,23 +56,46 @@ export default function NavBar() {
               </Link>
             </li>
             <li className="nav-item">
-              <Link passHref href="/blog/new">
-                <a className="nav-link">Create Blog Post</a>
-              </Link>
+              {user ? (
+                <Link passHref href="/blog/new">
+                  <a className="nav-link">Create Blog Post</a>
+                </Link>
+              ) : <></>}
             </li>
             <li className="nav-item">
-              <Link passHref href="/">
-                <a className="nav-link">My Saved Therapists</a>
-              </Link>
+              {user ? (
+                <Link passHref href="/">
+                  <a className="nav-link">My Saved Therapists</a>
+                </Link>
+              ) : <></>}
             </li>
             <li className="nav-item">
-              <Link passHref href="/">
-                <a className="nav-link">Messages</a>
-              </Link>
+              {user ? (
+                <Link passHref href="/">
+                  <a className="nav-link">Messages</a>
+                </Link>
+              ) : <></>}
             </li>
-            <Link passHref href="/profile">
-              <a className="nav-link">Profile</a>
-            </Link>
+            <li>
+              {user ? (
+                <Link passHref href="/profile">
+                  <a className="nav-link">Profile</a>
+                </Link>
+              ) : (
+                <></>
+              )}
+            </li>
+            {user ? (
+              <Link href="/" passHref>
+                <Button type="button" className="btn btn-danger" onClick={signOutUser}>
+                  Sign Out
+                </Button>
+              </Link>
+            ) : (
+              <Button type="button" className="btn btn-success" onClick={signIn}>
+                Sign In
+              </Button>
+            )}
           </ul>
         </div>
       </div>
