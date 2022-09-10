@@ -1,9 +1,9 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import { useEffect, useState } from 'react';
 import { Button, Dropdown } from 'react-bootstrap';
-// import DropdownItem from 'react-bootstrap/esm/DropdownItem';
+import { useRouter } from 'next/router';
 import {
-  getUsers, getUsersByEthnicity, getUsersByGender, getUsersByPronouns, getUsersBySexualOrientation,
+  getUsers, getUsersByEthnicity, getUsersByGender, getUsersByPronouns, getUsersBySexualOrientation, getUsersByUid,
 } from '../api/userData';
 import UserCard from '../components/UserCard';
 import { useAuth } from '../utils/context/authContext';
@@ -12,6 +12,7 @@ import {
 } from '../api/demographicData';
 
 function Home() {
+  const router = useRouter();
   const [genders, setGenders] = useState([]);
   const [pronouns, setPronouns] = useState([]);
   const [ethnicities, setEthnicities] = useState([]);
@@ -23,8 +24,18 @@ function Home() {
       setUsers(userArr);
     });
   };
+  const checkUserProfile = () => {
+    if (user.uid) {
+      getUsersByUid(user.uid).then((userObj) => {
+        if (!Object.values(userObj).length) {
+          router.push('/user/new');
+        } else router.push('/');
+      });
+    }
+  };
 
   useEffect(() => {
+    checkUserProfile();
     getAllUsers();
     getGenders().then(setGenders);
     getPronouns().then(setPronouns);

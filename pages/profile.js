@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import Link from 'next/link';
 import { Button } from 'react-bootstrap';
-import { useRouter } from 'next/router';
 import User from '../components/User';
 import { useAuth } from '../utils/context/authContext';
 import { signOut } from '../utils/auth';
@@ -10,12 +9,6 @@ import { getUsersByUid } from '../api/userData';
 export default function Profile() {
   const [member, setMember] = useState({});
   const { user } = useAuth();
-  const router = useRouter();
-  const logout = () => {
-    signOut();
-    router.push('/login');
-  };
-
   useEffect(() => {
     getUsersByUid(user.uid).then((response) => {
       setMember(response[0]);
@@ -32,7 +25,7 @@ export default function Profile() {
               Edit Profile
             </Button>
           </Link>
-          <Button type="button" className={member.uid !== user.uid ? 'noShow' : ''} variant="outline-danger" onClick={logout}>
+          <Button type="button" className={member.uid !== user.uid ? 'noShow' : ''} variant="outline-danger" onClick={signOut}>
             Sign Out
           </Button>
         </>
@@ -43,7 +36,7 @@ export default function Profile() {
               Create Profile
             </Button>
           </Link>
-          <Button type="button" variant="outline-danger" onClick={logout}>
+          <Button type="button" variant="outline-danger" onClick={signOut}>
             Sign Out
           </Button>
         </>
