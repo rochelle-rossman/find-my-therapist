@@ -1,17 +1,33 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 /* eslint-disable @next/next/no-img-element */
 /* eslint-disable react/no-unescaped-entities */
-import React from 'react';
+import React, { useEffect } from 'react';
 import PropTypes from 'prop-types';
 import { Button } from 'react-bootstrap';
 import Link from 'next/link';
+import { useRouter } from 'next/router';
 import { useAuth } from '../utils/context/authContext';
-import { deleteUser } from '../api/userData';
+import { deleteUser, getUsersByUid } from '../api/userData';
 
 function UserCard({ userObj, onUpdate }) {
+  const router = useRouter();
   const { user } = useAuth();
   const deleteThisUser = () => {
     deleteUser(userObj.firebaseKey).then(() => onUpdate());
   };
+  const checkUserProfile = () => {
+    if (user.uid) {
+      getUsersByUid(user.uid).then((userObject) => {
+        if (!Object.values(userObject).length) {
+          router.push('/user/new');
+        } else router.push('/');
+      });
+    }
+  };
+
+  useEffect(() => {
+    checkUserProfile();
+  }, []);
 
   return (
     <section className="light">
@@ -33,12 +49,16 @@ function UserCard({ userObj, onUpdate }) {
             <div className="postcard__bar" />
             <div className="contentPreview">{userObj.bio}</div>
             <ul className="postcard__tagbox">
-              <li className="tag__item">
-                <Button variant="link">SAVE</Button>
-              </li>
-              <li className="tag__item">
-                <Button variant="link">MESSAGE</Button>
-              </li>
+              {user ? (
+                <>
+                  <li className="tag__item">
+                    <Button variant="link">SAVE</Button>
+                  </li>
+                  <li className="tag__item">
+                    <Button variant="link">MESSAGE</Button>
+                  </li>
+                </>
+              ) : <></>}
               <li className={userObj.uid !== user.uid ? 'noShow' : 'tag__item'}>
                 <Button variant="link" onClick={deleteThisUser}>DELETE</Button>
               </li>
