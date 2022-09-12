@@ -23,8 +23,8 @@ export default function NavBar() {
   };
 
   const signOutUser = () => {
-    router.push('/');
     signOut();
+    router.push('/');
   };
 
   useEffect(() => {
