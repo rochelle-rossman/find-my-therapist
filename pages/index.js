@@ -28,8 +28,8 @@ function Home() {
     if (user.uid) {
       getUsersByUid(user.uid).then((userObj) => {
         if (!Object.values(userObj).length) {
-          router.push('/user/new');
-        } else router.push('/');
+          router.push('/');
+        }
       });
     }
   };

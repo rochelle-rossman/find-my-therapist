@@ -1,20 +1,25 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 /* eslint-disable @next/next/no-img-element */
 /* eslint-disable react/no-unescaped-entities */
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
 import { Button } from 'react-bootstrap';
-import Link from 'next/link';
 import { useRouter } from 'next/router';
+import Link from 'next/link';
 import { useAuth } from '../utils/context/authContext';
-import { deleteUser, getUsersByUid } from '../api/userData';
+import { getSingleUser, getUsersByUid } from '../api/userData';
+import { createSavedTherapist, getSavedTherapistByTherapistId, removeSavedTherapist } from '../api/savedTherapistData';
 
 function UserCard({ userObj, onUpdate }) {
+  const [savedTherapists, setSavedTherapists] = useState({});
   const router = useRouter();
   const { user } = useAuth();
-  const deleteThisUser = () => {
-    deleteUser(userObj.firebaseKey).then(() => onUpdate());
+  const deleteThisTherapist = () => {
+    if (window.confirm(`Remove ${savedTherapists?.name} from your saved therapists?`)) {
+      removeSavedTherapist(savedTherapists?.firebaseKey).then(() => onUpdate());
+    }
   };
+
   const checkUserProfile = () => {
     if (user.uid) {
       getUsersByUid(user.uid).then((userObject) => {
@@ -25,15 +30,37 @@ function UserCard({ userObj, onUpdate }) {
     }
   };
 
+  const addToUserSavedTherapists = () => {
+    const payload = {
+      name: userObj.name,
+      uid: user.uid,
+      photo: userObj.photo,
+      pronouns: userObj.pronouns,
+      bio: userObj.bio,
+      email: userObj.email,
+      gender: userObj.gender,
+      phone: userObj.phone,
+      sexualOrientation: userObj.sexualOrientation,
+      ethnicity: userObj.ethnicity,
+      therapistId: userObj.firebaseKey,
+    };
+    getSingleUser(userObj.firebaseKey).then(() => {
+      createSavedTherapist(payload);
+    });
+  };
+
   useEffect(() => {
     checkUserProfile();
-  }, []);
+    getSavedTherapistByTherapistId(userObj.firebaseKey).then((therapistArr) => {
+      setSavedTherapists(therapistArr[0]);
+    });
+  }, [userObj]);
 
   return (
     <section className="light">
       <div className="container py-2">
         <article className="postcard light blue">
-          <a className="postcard__img_link" href={`/user/${userObj.firebaseKey}`} passHref>
+          <a className="postcard__img_link" href={`/user/${userObj.firebaseKey}`} passhref="true">
             <img className="postcard__img" src={userObj.photo} alt={userObj.name} />
           </a>
           <div className="postcard__text t-dark">
@@ -42,31 +69,30 @@ function UserCard({ userObj, onUpdate }) {
             </h2>
             <div className="postcard__subtitle small">
               <h5>{userObj.pronouns}</h5>
-              <h6>
-                {userObj.email}
-              </h6>
+              <h6>{userObj.email}</h6>
             </div>
             <div className="postcard__bar" />
             <div className="contentPreview">{userObj.bio}</div>
             <ul className="postcard__tagbox">
               {user ? (
                 <>
-                  <li className="tag__item">
-                    <Button variant="link">SAVE</Button>
+                  <li className={userObj.uid === user.uid || savedTherapists?.therapistId === userObj?.firebaseKey ? 'noShow' : 'tag__item'}>
+                    <Link href="/savedTherapists/savedTherapists" passHref>
+                      <Button variant="link" onClick={addToUserSavedTherapists}>
+                        SAVE
+                      </Button>
+                    </Link>
                   </li>
-                  <li className="tag__item">
-                    <Button variant="link">MESSAGE</Button>
-                  </li>
+                  {savedTherapists?.therapistId === userObj?.firebaseKey
+                    ? (
+                      <li className="tag__item">
+                        <Button variant="link" onClick={deleteThisTherapist}>REMOVE FROM SAVED THERAPISTS</Button>
+                      </li>
+                    ) : <></>}
                 </>
-              ) : <></>}
-              <li className={userObj.uid !== user.uid ? 'noShow' : 'tag__item'}>
-                <Button variant="link" onClick={deleteThisUser}>DELETE</Button>
-              </li>
-              <li className={userObj.uid !== user.uid ? 'noShow' : 'tag__item'}>
-                <Link href={`/user/edit/${userObj.firebaseKey}`} passHref>
-                  <Button variant="link">EDIT</Button>
-                </Link>
-              </li>
+              ) : (
+                <></>
+              )}
             </ul>
           </div>
         </article>
@@ -87,6 +113,8 @@ UserCard.propTypes = {
     uid: PropTypes.string,
     sexualOrientation: PropTypes.string,
     bio: PropTypes.string,
+    gender: PropTypes.string,
+    ethnicity: PropTypes.string,
   }).isRequired,
   onUpdate: PropTypes.func.isRequired,
 };

@@ -21,14 +21,14 @@ export default function ViewBlog() {
       <div className="text-black ms-5 details">
         <h3>{blogDetails.title}</h3>
         <h5>
-          by <a href={`/user/${blogDetails.userObject?.firebaseKey}`}>{blogDetails.userObject?.name}</a>
+          by <a href={`/user/${blogDetails.author?.firebaseKey}`}>{blogDetails.author?.name}</a>
         </h5>
         <h6>{blogDetails.timeStamp}</h6>
         <hr />
         <p>{blogDetails.content}</p>
         <hr />
         <h6>
-          Email: <a href={`mailto:${blogDetails.userObject?.email}`}>{blogDetails.userObject?.email}</a>
+          Email: <a href={`mailto:${blogDetails.author?.email}`}>{blogDetails.author?.email}</a>
         </h6>
       </div>
     </div>
