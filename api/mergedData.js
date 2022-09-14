@@ -1,12 +1,12 @@
 import { getSingleBlogPost } from './blogData';
-import { getSingleUser } from './userData';
+import { getUsersByUid } from './userData';
 
 const viewBlogDetails = (blogFirebaseKey) => new Promise((resolve, reject) => {
   getSingleBlogPost(blogFirebaseKey)
     .then((blogObject) => {
-      getSingleUser(blogObject.therapistId)
+      getUsersByUid(blogObject.uid)
         .then((userObject) => {
-          resolve({ userObject, ...blogObject });
+          resolve({ author: userObject[0], ...blogObject });
         });
     }).catch((error) => reject(error));
 });

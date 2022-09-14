@@ -1,6 +1,6 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 /* eslint-disable jsx-a11y/anchor-is-valid */
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
 import { Button } from 'react-bootstrap';
@@ -9,6 +9,7 @@ import { getUsersByUid } from '../api/userData';
 import { signIn, signOut } from '../utils/auth';
 
 export default function NavBar() {
+  const [member, setMember] = useState();
   const router = useRouter();
   const { user } = useAuth();
 
@@ -28,6 +29,9 @@ export default function NavBar() {
   };
 
   useEffect(() => {
+    getUsersByUid(user.uid).then((userArr) => {
+      setMember(userArr[0]);
+    });
     checkUserProfile();
   }, [user]);
 
@@ -56,7 +60,7 @@ export default function NavBar() {
               </Link>
             </li>
             <li className="nav-item">
-              {user ? (
+              {member?.isTherapist ? (
                 <Link passHref href="/blog/new">
                   <a className="nav-link">Create Blog Post</a>
                 </Link>
@@ -64,7 +68,7 @@ export default function NavBar() {
             </li>
             <li className="nav-item">
               {user ? (
-                <Link passHref href="/">
+                <Link passHref href="/savedTherapists/savedTherapists">
                   <a className="nav-link">My Saved Therapists</a>
                 </Link>
               ) : <></>}
