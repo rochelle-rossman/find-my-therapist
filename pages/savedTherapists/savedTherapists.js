@@ -29,6 +29,7 @@ export default function SavedTherapists() {
 
   return (
     <div>
+      <h2 className="pageHeader">YOUR SAVED THERAPISTS</h2>
       {therapists.map((therapist) => (
         <SavedTherapistCard therapistObj={therapist} onUpdate={getSavedTherapists} key={therapist.firebaseKey} />
       ))}

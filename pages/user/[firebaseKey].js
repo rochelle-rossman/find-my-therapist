@@ -4,6 +4,8 @@ import React, { useState, useEffect } from 'react';
 import { Button } from 'react-bootstrap';
 // import Link from 'next/link';
 import { useRouter } from 'next/router';
+import { MdOutlineMail } from 'react-icons/md';
+import { HiOutlinePhone } from 'react-icons/hi';
 import { getSingleUser, getUsersByUid } from '../../api/userData';
 import { useAuth } from '../../utils/context/authContext';
 
@@ -41,14 +43,26 @@ export default function ViewUser() {
             </h2>
             <div className="postcard__subtitle small">
               <h5>{userDetails?.pronouns}</h5>
-              <h6>{userDetails?.email}</h6>
+              <h6>
+                <MdOutlineMail /> <a href={`mailto:${userDetails.email}`}>{userDetails?.email}</a>
+              </h6>
+              <h6>
+                <HiOutlinePhone /> <a href={`tel:${userDetails.phone}`}>{userDetails?.phone}</a>
+              </h6>
             </div>
             <div className="postcard__bar" />
             <div>{userDetails?.bio}</div>
             <ul className="postcard__tagbox">
-              <li className="tag__item">
-                <Button variant="link">MESSAGE</Button>
-              </li>
+              {user ? (
+                <>
+                  <li className="tag__item">
+                    <Button variant="link">SAVE</Button>
+                  </li>
+                  <li className="tag__item">
+                    <Button variant="link">MESSAGE</Button>
+                  </li>
+                </>
+              ) : <></>}
             </ul>
           </div>
         </article>
