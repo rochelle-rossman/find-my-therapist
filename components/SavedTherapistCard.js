@@ -2,7 +2,7 @@
 /* eslint-disable @next/next/no-img-element */
 import PropTypes from 'prop-types';
 import { Button } from 'react-bootstrap';
-import { MdOutlineEmail } from 'react-icons/md';
+import { MdOutlineEmail, MdOutlineStarPurple500 } from 'react-icons/md';
 import { HiOutlinePhone } from 'react-icons/hi';
 import { useAuth } from '../utils/context/authContext';
 import { removeSavedTherapist } from '../api/savedTherapistData';
@@ -34,6 +34,7 @@ function SavedTherapistCard({ therapistObj, onUpdate }) {
               <h6>
                 <HiOutlinePhone /> <a href={`tel:${therapistObj.phone}`}>{therapistObj.phone}</a>
               </h6>
+              <MdOutlineStarPurple500 />
             </div>
             <div className="postcard__bar" />
             <div className="contentPreview">{therapistObj.bio}</div>

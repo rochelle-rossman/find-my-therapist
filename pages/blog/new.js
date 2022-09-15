@@ -15,8 +15,8 @@ export default function CreateBlog() {
 
   return (
     <>
-      {member.isTherapist ? (<BlogForm />) : <></>}
+      {member.isTherapist ? <BlogForm /> : <></>}
+      {/* <h2 className="pageHeader">Join our therapist community to share your thoughts and experiences.</h2> */}
     </>
-
   );
 }

@@ -20,6 +20,7 @@ function User({ userObj }) {
               <h6><HiOutlinePhone /> {userObj.phone}</h6>
             </div>
             <div className="postcard__bar" />
+            <div>{userObj.bio}</div>
           </div>
         </article>
       </div>
@@ -33,6 +34,7 @@ User.propTypes = {
     email: PropTypes.string,
     phone: PropTypes.string,
     pronouns: PropTypes.string,
+    bio: PropTypes.string,
   }),
 };
 User.defaultProps = {
