@@ -1,5 +1,7 @@
 /* eslint-disable @next/next/no-img-element */
 import React from 'react';
+import { MdOutlineEmail } from 'react-icons/md';
+import { HiOutlinePhone } from 'react-icons/hi';
 import PropTypes from 'prop-types';
 
 function User({ userObj }) {
@@ -12,8 +14,10 @@ function User({ userObj }) {
             <h2 className="postcard__title blue">{userObj.name}</h2>
             <div className="postcard__subtitle small">
               <h5>{userObj.pronouns}</h5>
-              <h6>Email: {userObj.email}</h6>
-              <h6>Phone: {userObj.phone}</h6>
+              <h6>
+                <MdOutlineEmail /> {userObj.email}
+              </h6>
+              <h6><HiOutlinePhone /> {userObj.phone}</h6>
             </div>
             <div className="postcard__bar" />
           </div>

@@ -2,6 +2,7 @@
 // import Link from 'next/link';
 import { useRouter } from 'next/router';
 import React, { useState, useEffect } from 'react';
+import { MdOutlineEmail } from 'react-icons/md';
 import viewBlogDetails from '../../api/mergedData';
 
 export default function ViewBlog() {
@@ -28,7 +29,7 @@ export default function ViewBlog() {
         <p>{blogDetails.content}</p>
         <hr />
         <h6>
-          Email: <a href={`mailto:${blogDetails.author?.email}`}>{blogDetails.author?.email}</a>
+          <MdOutlineEmail /> <a href={`mailto:${blogDetails.author?.email}`}>{blogDetails.author?.email}</a>
         </h6>
       </div>
     </div>

@@ -2,6 +2,8 @@
 /* eslint-disable @next/next/no-img-element */
 import PropTypes from 'prop-types';
 import { Button } from 'react-bootstrap';
+import { MdOutlineEmail } from 'react-icons/md';
+import { HiOutlinePhone } from 'react-icons/hi';
 import { useAuth } from '../utils/context/authContext';
 import { removeSavedTherapist } from '../api/savedTherapistData';
 
@@ -26,12 +28,16 @@ function SavedTherapistCard({ therapistObj, onUpdate }) {
             </h2>
             <div className="postcard__subtitle small">
               <h5>{therapistObj.pronouns}</h5>
-              <h6>{therapistObj.email}</h6>
+              <h6>
+                <MdOutlineEmail /> <a href={`mailto:${therapistObj.email}`}>{therapistObj.email}</a>
+              </h6>
+              <h6>
+                <HiOutlinePhone /> <a href={`tel:${therapistObj.phone}`}>{therapistObj.phone}</a>
+              </h6>
             </div>
             <div className="postcard__bar" />
             <div className="contentPreview">{therapistObj.bio}</div>
             <ul className="postcard__tagbox">
-
               <li className={therapistObj.uid !== user.uid ? 'noShow' : 'tag__item'}>
                 <Button variant="link" onClick={deleteThisTherapist}>
                   REMOVE
@@ -40,7 +46,6 @@ function SavedTherapistCard({ therapistObj, onUpdate }) {
               <li className={therapistObj.uid !== user.uid ? 'noShow' : 'tag__item'}>
                 <Button variant="link">MESSAGE</Button>
               </li>
-
             </ul>
           </div>
         </article>
