@@ -92,7 +92,7 @@ export default function ViewUser() {
                         SAVE
                       </Button>
                     </li>
-                    {user.uid === savedTherapists?.uid || savedTherapists?.therapistId === userDetails?.firebaseKey ? (
+                    {user.uid === savedTherapists?.uid && savedTherapists?.therapistId === userDetails?.firebaseKey ? (
                       <li className="tag__item">
                         <Button variant="link" onClick={removeFromUsersSavedTherapists}>
                           REMOVE FROM SAVED

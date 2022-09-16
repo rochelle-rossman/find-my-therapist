@@ -1,3 +1,4 @@
+/* eslint-disable @next/next/no-img-element */
 /* eslint-disable react-hooks/exhaustive-deps */
 /* eslint-disable jsx-a11y/anchor-is-valid */
 import React, { useEffect, useState } from 'react';
@@ -40,6 +41,7 @@ export default function NavBar() {
       <div className="container-fluid">
         <Link passHref href="/">
           <a className="navbar-brand" data-bs-toggle="collapse" data-bs-target="#navbarTogglerDemo01">
+            <img className="navbarLogo" src="https://cdn.dribbble.com/users/2418354/screenshots/15562590/media/cb965f2f584d39f2e42a289bb3d0f726.gif" alt="find my therapist" />
             Find My Therapist
           </a>
         </Link>
@@ -64,14 +66,18 @@ export default function NavBar() {
                 <Link passHref href="/blog/new">
                   <a className="nav-link">Create Blog Post</a>
                 </Link>
-              ) : <></>}
+              ) : (
+                <></>
+              )}
             </li>
             <li className="nav-item">
               {user ? (
                 <Link passHref href="/savedTherapists/savedTherapists">
                   <a className="nav-link">My Saved Therapists</a>
                 </Link>
-              ) : <></>}
+              ) : (
+                <></>
+              )}
             </li>
             <li>
               {user ? (

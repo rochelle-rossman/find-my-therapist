@@ -26,7 +26,6 @@ function BlogForm({ obj }) {
       ...prevState,
       [name]: value,
     }));
-    console.warn(formInput);
   };
 
   const handleSubmit = (e) => {
