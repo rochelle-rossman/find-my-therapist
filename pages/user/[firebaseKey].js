@@ -66,13 +66,9 @@ export default function ViewUser() {
       <section className="light">
         <div className="container py-2">
           <article className="postcard light blue">
-            <a className="postcard__img_link" href={`/savedTherapists/${userDetails?.firebaseKey}`} passhref="true">
-              <img className="postcard__img" src={userDetails?.photo} alt={userDetails?.name} />
-            </a>
+            <img className="postcard__img" src={userDetails?.photo} alt={userDetails?.name} />
             <div className="postcard__text t-dark">
-              <h2 className="postcard__title blue">
-                <a href={`/savedTherapists/${userDetails?.firebaseKey}`}>{userDetails?.name}</a>
-              </h2>
+              <h2>{userDetails?.name}</h2>
               <div className="postcard__subtitle small">
                 <h5>{userDetails?.pronouns}</h5>
                 <h6>
@@ -81,21 +77,26 @@ export default function ViewUser() {
                 <h6>
                   <HiOutlinePhone /> <a href={`tel:${userDetails.phone}`}>{userDetails?.phone}</a>
                 </h6>
-                {savedTherapists?.therapistId === userDetails?.firebaseKey ? <MdOutlineStarPurple500 /> : <></>}
+                <h6>{userDetails.gender}</h6>
+                <h6>{userDetails.sexualOrientation}</h6>
+                <h6>{userDetails.ethnicity}</h6>
+                {user.uid === savedTherapists?.uid && savedTherapists?.therapistId === userDetails?.firebaseKey ? <MdOutlineStarPurple500 /> : <></>}
               </div>
               <div className="postcard__bar" />
               <div>{userDetails?.bio}</div>
               <ul className="postcard__tagbox">
                 {user ? (
                   <>
-                    <li className={userDetails.uid === user.uid || savedTherapists?.therapistId === userDetails?.firebaseKey ? 'noShow' : 'tag__item'}>
+                    <li className={user.uid === savedTherapists?.uid || savedTherapists?.therapistId === userDetails?.firebaseKey ? 'noShow' : 'tag__item'}>
                       <Button variant="link" onClick={addToUserSavedTherapists}>
                         SAVE
                       </Button>
                     </li>
-                    {savedTherapists?.therapistId === userDetails?.firebaseKey ? (
+                    {user.uid === savedTherapists?.uid || savedTherapists?.therapistId === userDetails?.firebaseKey ? (
                       <li className="tag__item">
-                        <Button variant="link" onClick={removeFromUsersSavedTherapists}>REMOVE FROM SAVED</Button>
+                        <Button variant="link" onClick={removeFromUsersSavedTherapists}>
+                          REMOVE FROM SAVED
+                        </Button>
                       </li>
                     ) : (
                       <></>
@@ -110,7 +111,7 @@ export default function ViewUser() {
         </div>
       </section>
       <div className="d-flex flex-wrap">
-        {therapistsBlogs ? <h4 className="pageHeader">Blog Posts Written by {userDetails.name}</h4> : <></>}
+        {therapistsBlogs.length ? <h4 className="pageHeader">Blog Posts Written by {userDetails.name}</h4> : <></>}
         {therapistsBlogs.map((blog) => (
           <BlogPostCard key={blog.firebaseKey} blogObj={blog} onUpdate={setTherapistsBlogs} className="blogCard" />
         ))}
