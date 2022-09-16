@@ -1,3 +1,4 @@
+/* eslint-disable import/order */
 /* eslint-disable react-hooks/exhaustive-deps */
 /* eslint-disable @next/next/no-img-element */
 import PropTypes from 'prop-types';
@@ -6,6 +7,7 @@ import { MdOutlineEmail, MdOutlineStarPurple500 } from 'react-icons/md';
 import { HiOutlinePhone } from 'react-icons/hi';
 import { useAuth } from '../utils/context/authContext';
 import { removeSavedTherapist } from '../api/savedTherapistData';
+import Link from 'next/link';
 
 function SavedTherapistCard({ therapistObj, onUpdate }) {
   const { user } = useAuth();
@@ -19,9 +21,9 @@ function SavedTherapistCard({ therapistObj, onUpdate }) {
     <section className="light">
       <div className="container py-2">
         <article className="postcard light blue">
-          <a className="postcard__img_link" href={`/savedTherapists/${therapistObj.firebaseKey}`} passhref="true">
+          <Link className="postcard__img_link" href={`/savedTherapists/${therapistObj.firebaseKey}`} passHref>
             <img className="postcard__img" src={therapistObj.photo} alt={therapistObj.name} />
-          </a>
+          </Link>
           <div className="postcard__text t-dark">
             <h2 className="postcard__title blue">
               <a href={`/user/${therapistObj.therapistId}`}>{therapistObj.name}</a>

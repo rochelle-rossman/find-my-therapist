@@ -62,9 +62,9 @@ function UserCard({ userObj, onUpdate }) {
     <section className="light">
       <div className="container py-2">
         <article className="postcard light blue">
-          <a className="postcard__img_link" href={`/user/${userObj.firebaseKey}`} passhref="true">
+          <Link className="postcard__img_link" href={`/user/${userObj.firebaseKey}`} passHref>
             <img className="postcard__img" src={userObj.photo} alt={userObj.name} />
-          </a>
+          </Link>
           <div className="postcard__text t-dark">
             <h2 className="postcard__title blue">
               <a href={`/user/${userObj.firebaseKey}`}>{userObj.name}</a>
