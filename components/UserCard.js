@@ -71,27 +71,28 @@ function UserCard({ userObj, onUpdate }) {
             </h2>
             <div className="postcard__subtitle small">
               <h5>{userObj.pronouns}</h5>
+              <h6>{userObj.gender}</h6>
               <h6>
                 <MdOutlineEmail /> <a href={`mailto:${userObj.email}`}>{userObj.email}</a>
               </h6>
               <h6>
                 <HiOutlinePhone /> <a href={`tel:${userObj.phone}`}>{userObj.phone}</a>
               </h6>
-              {savedTherapists?.therapistId === userObj?.firebaseKey ? <MdOutlineStarPurple500 /> : <></>}
+              {user.uid === savedTherapists?.uid && savedTherapists?.therapistId === userObj?.firebaseKey ? <MdOutlineStarPurple500 /> : <></>}
             </div>
             <div className="postcard__bar" />
             <div className="contentPreview">{userObj.bio}</div>
             <ul className="postcard__tagbox">
               {user ? (
                 <>
-                  <li className={userObj.uid === user.uid || savedTherapists?.therapistId === userObj?.firebaseKey ? 'noShow' : 'tag__item'}>
+                  <li className={userObj.uid === user.uid || (user.uid === savedTherapists?.uid && savedTherapists?.therapistId === userObj?.firebaseKey) ? 'noShow' : 'tag__item'}>
                     <Link href="/savedTherapists/savedTherapists" passHref>
                       <Button variant="link" onClick={addToUserSavedTherapists}>
                         ADD TO SAVED
                       </Button>
                     </Link>
                   </li>
-                  {savedTherapists?.therapistId === userObj?.firebaseKey ? (
+                  {user.uid === savedTherapists?.uid && savedTherapists?.therapistId === userObj?.firebaseKey ? (
                     <li className="tag__item">
                       <Button variant="link" onClick={deleteThisTherapist}>
                         REMOVE FROM SAVED

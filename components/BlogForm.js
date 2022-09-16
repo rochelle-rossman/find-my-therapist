@@ -64,7 +64,7 @@ BlogForm.propTypes = {
     image: PropTypes.string,
     firebaseKey: PropTypes.string,
     photo: PropTypes.string,
-    therapistId: PropTypes.string,
+    uid: PropTypes.string,
   }),
 };
 

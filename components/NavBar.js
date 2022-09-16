@@ -73,13 +73,6 @@ export default function NavBar() {
                 </Link>
               ) : <></>}
             </li>
-            <li className="nav-item">
-              {user ? (
-                <Link passHref href="/">
-                  <a className="nav-link">Messages</a>
-                </Link>
-              ) : <></>}
-            </li>
             <li>
               {user ? (
                 <Link passHref href="/profile">

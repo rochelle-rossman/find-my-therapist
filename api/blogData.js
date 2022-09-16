@@ -19,9 +19,16 @@ const getSingleBlogPost = (firebaseKey) => new Promise((resolve, reject) => {
     .catch((error) => reject(error));
 });
 
-const getBlogPostsByTherapist = (therapistId) => new Promise((resolve, reject) => {
-  axios.get(`${dbUrl}/blogPosts/${therapistId}.json`)
-    .then((response) => resolve(response.data))
+const getBlogPostsByTherapist = (uid) => new Promise((resolve, reject) => {
+  axios
+    .get(`${dbUrl}/blogPosts.json?orderBy="uid"&equalTo="${uid}"`)
+    .then((response) => {
+      if (response.data) {
+        resolve(Object.values(response.data));
+      } else {
+        resolve([]);
+      }
+    })
     .catch((error) => reject(error));
 });
 

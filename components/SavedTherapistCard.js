@@ -24,7 +24,7 @@ function SavedTherapistCard({ therapistObj, onUpdate }) {
           </a>
           <div className="postcard__text t-dark">
             <h2 className="postcard__title blue">
-              <a href={`/savedTherapists/${therapistObj.firebaseKey}`}>{therapistObj.name}</a>
+              <a href={`/user/${therapistObj.therapistId}`}>{therapistObj.name}</a>
             </h2>
             <div className="postcard__subtitle small">
               <h5>{therapistObj.pronouns}</h5>
@@ -43,9 +43,6 @@ function SavedTherapistCard({ therapistObj, onUpdate }) {
                 <Button variant="link" onClick={deleteThisTherapist}>
                   REMOVE
                 </Button>
-              </li>
-              <li className={therapistObj.uid !== user.uid ? 'noShow' : 'tag__item'}>
-                <Button variant="link">MESSAGE</Button>
               </li>
             </ul>
           </div>
@@ -67,6 +64,7 @@ SavedTherapistCard.propTypes = {
     uid: PropTypes.string,
     sexualOrientation: PropTypes.string,
     bio: PropTypes.string,
+    therapistId: PropTypes.string,
   }).isRequired,
   onUpdate: PropTypes.func.isRequired,
 };
