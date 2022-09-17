@@ -1,9 +1,9 @@
 import { useRouter } from 'next/router';
 import React, { useEffect, useState } from 'react';
-import { getSavedTherapists } from '../../api/savedTherapistData';
-import SavedTherapistCard from '../../components/SavedTherapistCard';
-import { useAuth } from '../../utils/context/authContext';
-import { getUsersByUid } from '../../api/userData';
+import { getSavedTherapists } from '../api/savedTherapistData';
+import SavedTherapistCard from '../components/SavedTherapistCard';
+import { useAuth } from '../utils/context/authContext';
+import { getUsersByUid } from '../api/userData';
 
 export default function SavedTherapists() {
   const { user } = useAuth();

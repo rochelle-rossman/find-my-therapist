@@ -72,7 +72,7 @@ export default function NavBar() {
             </li>
             <li className="nav-item">
               {user ? (
-                <Link passHref href="/savedTherapists/savedTherapists">
+                <Link passHref href="/savedTherapists">
                   <a className="nav-link">My Saved Therapists</a>
                 </Link>
               ) : (
