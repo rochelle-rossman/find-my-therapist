@@ -1,5 +1,6 @@
 @import 'bootstrap/dist/css/bootstrap.css';
 @import url("https://fonts.googleapis.com/css2?family=Baloo+2&display=swap");
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap');
 
 .contentPreview {
   display: block;
@@ -49,7 +50,7 @@ $main-blue-rgb-015: rgba(0, 118, 189, 0.1) !default;
 
 /* This pen */
 body {
-  font-family: "Baloo 2", cursive;
+  font-family: 'Montserrat', sans-serif;
   font-size: 16px;
   color: black;
   text-rendering: optimizeLegibility;
