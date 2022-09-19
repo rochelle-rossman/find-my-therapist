@@ -2,12 +2,11 @@
 /* eslint-disable @next/next/no-img-element */
 /* eslint-disable react/no-unescaped-entities */
 import React, { useEffect, useState } from 'react';
-import { MdOutlineEmail, MdOutlineStarPurple500 } from 'react-icons/md';
+import { MdOutlineStarPurple500 } from 'react-icons/md';
 import PropTypes from 'prop-types';
 import { Button } from 'react-bootstrap';
 import { useRouter } from 'next/router';
 import Link from 'next/link';
-import { HiOutlinePhone } from 'react-icons/hi';
 import { useAuth } from '../utils/context/authContext';
 import { getSingleUser, getUsersByUid } from '../api/userData';
 import { createSavedTherapist, getSavedTherapistByTherapistId, removeSavedTherapist } from '../api/savedTherapistData';
@@ -71,13 +70,6 @@ function UserCard({ userObj, onUpdate }) {
             </h2>
             <div className="postcard__subtitle small">
               <h5>{userObj.pronouns}</h5>
-              <h6>{userObj.gender}</h6>
-              <h6>
-                <MdOutlineEmail /> <a href={`mailto:${userObj.email}`}>{userObj.email}</a>
-              </h6>
-              <h6>
-                <HiOutlinePhone /> <a href={`tel:${userObj.phone}`}>{userObj.phone}</a>
-              </h6>
               {user.uid === savedTherapists?.uid && savedTherapists?.therapistId === userObj?.firebaseKey ? <MdOutlineStarPurple500 /> : <></>}
             </div>
             <div className="postcard__bar" />
@@ -86,7 +78,7 @@ function UserCard({ userObj, onUpdate }) {
               {user ? (
                 <>
                   <li className={userObj.uid === user.uid || (user.uid === savedTherapists?.uid && savedTherapists?.therapistId === userObj?.firebaseKey) ? 'noShow' : 'tag__item'}>
-                    <Link href="/savedTherapists/savedTherapists" passHref>
+                    <Link href="/savedTherapists" passHref>
                       <Button variant="link" onClick={addToUserSavedTherapists}>
                         ADD TO SAVED
                       </Button>
