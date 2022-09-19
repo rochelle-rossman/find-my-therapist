@@ -71,15 +71,15 @@ export default function ViewUser() {
               <h2>{userDetails?.name}</h2>
               <div className="postcard__subtitle small">
                 <h5>{userDetails?.pronouns}</h5>
+                <h6>{userDetails.gender}</h6>
+                <h6>{userDetails.sexualOrientation}</h6>
+                <h6>{userDetails.ethnicity}</h6>
                 <h6>
                   <MdOutlineMail /> <a href={`mailto:${userDetails.email}`}>{userDetails?.email}</a>
                 </h6>
                 <h6>
                   <HiOutlinePhone /> <a href={`tel:${userDetails.phone}`}>{userDetails?.phone}</a>
                 </h6>
-                <h6>{userDetails.gender}</h6>
-                <h6>{userDetails.sexualOrientation}</h6>
-                <h6>{userDetails.ethnicity}</h6>
                 {user.uid === savedTherapists?.uid && savedTherapists?.therapistId === userDetails?.firebaseKey ? <MdOutlineStarPurple500 /> : <></>}
               </div>
               <div className="postcard__bar" />
