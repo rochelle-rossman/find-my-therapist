@@ -54,12 +54,18 @@ export default function ViewUser() {
   };
 
   useEffect(() => {
-    getSingleUser(firebaseKey).then(setUserDetails);
-    getBlogPostsByTherapist(userDetails.uid).then(setTherapistsBlogs);
-    getSavedTherapistByTherapistId(userDetails.firebaseKey).then((therapistArr) => {
-      setSavedTherapists(therapistArr[0]);
-    });
-    checkUserProfile();
+    let mounted = true;
+    if (mounted) {
+      getSingleUser(firebaseKey).then(setUserDetails);
+      getBlogPostsByTherapist(userDetails.uid).then(setTherapistsBlogs);
+      getSavedTherapistByTherapistId(userDetails.firebaseKey).then((therapistArr) => {
+        setSavedTherapists(therapistArr[0]);
+      });
+      checkUserProfile();
+    }
+    return function cleanup() {
+      mounted = false;
+    };
   }, [userDetails]);
   return (
     <>
