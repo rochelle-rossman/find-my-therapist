@@ -1,13 +1,14 @@
 @import 'bootstrap/dist/css/bootstrap.css';
 @import url("https://fonts.googleapis.com/css2?family=Baloo+2&display=swap");
 @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Paytone+One&display=swap');
 
 .contentPreview {
   display: block;
   text-overflow: ellipsis;
   word-wrap: break-word;
-  overflow: hidden;
-  max-height: 5.4em;
+  overflow: scroll;
+  max-height: 7.2em;
   line-height: 1.8em;
 }
 
@@ -23,7 +24,7 @@
 
 .pageHeader{
   text-align: center;
-  padding: 10px;
+  padding: 5px;
 }
 
 .searchInput {
@@ -38,7 +39,20 @@
   border-radius: 50%;
 }
 
-// COPIED SCSS FROM CODEPEN
+.collapse {
+  justify-content: flex-end !important;
+}
+
+.nav-link {
+  color: white;
+  padding: 10px;
+}
+
+.navbar-brand {
+  font-family: 'Paytone One', sans-serif;
+  padding-right: 10px;
+}
+
 $main-green: #79dd09 !default;
 $main-green-rgb-015: rgba(121, 221, 9, 0.1) !default;
 $main-yellow: #bdbb49 !default;
@@ -48,7 +62,6 @@ $main-red-rgb-015: rgba(189, 21, 11, 0.1) !default;
 $main-blue: #0076bd !default;
 $main-blue-rgb-015: rgba(0, 118, 189, 0.1) !default;
 
-/* This pen */
 body {
   font-family: 'Montserrat', sans-serif;
   font-size: 16px;
@@ -56,11 +69,6 @@ body {
   text-rendering: optimizeLegibility;
   font-weight: initial;
 }
-
-.dark {
-  background: #110f16;
-}
-
 
 .light {
   background: white;
@@ -70,13 +78,6 @@ a,
 a:hover {
   text-decoration: none;
   transition: color 0.3s ease-in-out;
-}
-
-#pageHeaderTitle {
-  margin: 2rem 0;
-  text-transform: uppercase;
-  text-align: center;
-  font-size: 2.5rem;
 }
 
 /* Cards */
@@ -90,10 +91,6 @@ a:hover {
   overflow: hidden;
   position: relative;
   color: #ffffff;
-
-  &.dark {
-    background-color: #18151f;
-  }
 
   &.light {
     background-color: #e1e5ea;
