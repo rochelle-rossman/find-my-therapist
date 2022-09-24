@@ -34,6 +34,11 @@ function BlogPostCard({ blogObj, onUpdate }) {
               <div className="postcard__bar" />
               <div className="contentPreview">{blogObj.content}</div>
               <ul className="postcard__tagbox">
+                {/* <li className="tag__item">
+                  <Link href={`/blog/${blogObj.firebaseKey}`} passHref>
+                    <Button variant="link">READ</Button>
+                  </Link>
+                </li> */}
                 <li className={blogObj.uid !== user.uid ? 'noShow' : 'tag__item'}>
                   <Button variant="link" onClick={deleteThisPost}>
                     DELETE
@@ -41,9 +46,7 @@ function BlogPostCard({ blogObj, onUpdate }) {
                 </li>
                 <li className={blogObj.uid !== user.uid ? 'noShow' : 'tag__item'}>
                   <Link href={`/blog/edit/${blogObj.firebaseKey}`} passHref>
-                    <Button variant="link">
-                      EDIT
-                    </Button>
+                    <Button variant="link">EDIT</Button>
                   </Link>
                 </li>
               </ul>
