@@ -1,7 +1,7 @@
-/* eslint-disable @next/next/no-img-element */
 /* eslint-disable react-hooks/exhaustive-deps */
+/* eslint-disable @next/next/no-img-element */
 /* eslint-disable jsx-a11y/anchor-is-valid */
-import React, { useEffect, useState } from 'react';
+import React, { useEffect } from 'react';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
 import { Button } from 'react-bootstrap';
@@ -10,7 +10,6 @@ import { getUsersByUid } from '../api/userData';
 import { signIn, signOut } from '../utils/auth';
 
 export default function NavBar() {
-  const [member, setMember] = useState();
   const router = useRouter();
   const { user } = useAuth();
 
@@ -30,14 +29,11 @@ export default function NavBar() {
   };
 
   useEffect(() => {
-    getUsersByUid(user.uid).then((userArr) => {
-      setMember(userArr[0]);
-    });
     checkUserProfile();
-  }, [user]);
+  }, []);
 
   return (
-    <nav className="navbar navbar-expand-md navbar-dark bg-dark">
+    <nav className="navbar navbar-expand-md navbar-dark bg-dark .me-auto .ml-auto">
       <div className="container-fluid">
         <Link passHref href="/">
           <a className="navbar-brand" data-bs-toggle="collapse" data-bs-target="#navbarTogglerDemo01">
@@ -50,56 +46,42 @@ export default function NavBar() {
         </button>
 
         <div className="collapse navbar-collapse" id="navbarTogglerDemo01">
-          <ul className="navbar-nav me-auto">
-            <li className="nav-item">
-              <Link passHref href="/">
-                <a className="nav-link">Home</a>
-              </Link>
-            </li>
-            <li className="nav-item">
-              <Link passHref href="/blog/blogPosts">
-                <a className="nav-link">Read Blog Posts</a>
-              </Link>
-            </li>
-            <li className="nav-item">
-              {member?.isTherapist ? (
-                <Link passHref href="/blog/new">
-                  <a className="nav-link">Create Blog Post</a>
-                </Link>
-              ) : (
-                <></>
-              )}
-            </li>
-            <li className="nav-item">
-              {user ? (
-                <Link passHref href="/savedTherapists">
-                  <a className="nav-link">My Saved Therapists</a>
-                </Link>
-              ) : (
-                <></>
-              )}
-            </li>
-            <li>
-              {user ? (
-                <Link passHref href="/profile">
-                  <a className="nav-link">Profile</a>
-                </Link>
-              ) : (
-                <></>
-              )}
-            </li>
-            {user ? (
-              <Link href="/" passHref>
-                <Button type="button" className="btn btn-danger" onClick={signOutUser}>
-                  Sign Out
-                </Button>
-              </Link>
-            ) : (
-              <Button type="button" className="btn btn-success" onClick={signIn}>
-                Sign In
+
+          <Link passHref href="/">
+            <a className="nav-link">Home</a>
+          </Link>
+
+          <Link passHref href="/blog/blogPosts">
+            <a className="nav-link">Blog</a>
+          </Link>
+
+          {user ? (
+            <Link passHref href="/savedTherapists">
+              <a className="nav-link">Saved Therapists</a>
+            </Link>
+          ) : (
+            <></>
+          )}
+
+          {user ? (
+            <Link passHref href="/profile">
+              <a className="nav-link">Profile</a>
+            </Link>
+          ) : (
+            <></>
+          )}
+
+          {user ? (
+            <Link href="/" passHref>
+              <Button type="button" className="btn btn-danger" onClick={signOutUser}>
+                Sign Out
               </Button>
-            )}
-          </ul>
+            </Link>
+          ) : (
+            <Button type="button" className="btn btn-success" onClick={signIn}>
+              Sign In
+            </Button>
+          )}
         </div>
       </div>
     </nav>
