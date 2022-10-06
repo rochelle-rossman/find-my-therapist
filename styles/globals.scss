@@ -50,7 +50,7 @@ $main-blue-rgb-015: rgba(0, 118, 189, 0.1) !default;
 
 /* This pen */
 body {
-  font-family: 'Montserrat', sans-serif;
+  font-family: 'Montserrat', sans-serif !important;
   font-size: 16px;
   color: black;
   text-rendering: optimizeLegibility;
