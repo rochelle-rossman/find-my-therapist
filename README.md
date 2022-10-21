@@ -17,6 +17,9 @@ An authenticated user who has created their therapist profile may contribute blo
 
 ![App Screenshot](https://i.postimg.cc/B6FRGsSS/Screenshot-2022-09-21-at-3-22-32-PM.png)
 
+## Video Walkthrough
+<a href="https://www.loom.com/share/7017de79658642cdbe0af571bde9811a">Loom</a>
+
 
 ## ERD
 ![](https://i.postimg.cc/ZnWF3pHY/Screenshot-2022-09-21-at-5-02-58-PM.png)
