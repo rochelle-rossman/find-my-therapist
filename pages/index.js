@@ -2,9 +2,7 @@
 import { useEffect, useState } from 'react';
 import { Button, Dropdown } from 'react-bootstrap';
 import { useRouter } from 'next/router';
-import {
-  getUsers, getUsersByEthnicity, getUsersByGender, getUsersByPronouns, getUsersBySexualOrientation, getUsersByUid,
-} from '../api/userData';
+import { getUsers, getUsersByUid } from '../api/userData';
 import UserCard from '../components/UserCard';
 import { useAuth } from '../utils/context/authContext';
 import {
@@ -43,57 +41,12 @@ function Home() {
     getSexualOrientations().then(setSexualOrientations);
   }, [user]);
 
-  const handleClick = (e) => {
-    const { text } = e.target;
-    if (e.target.value === 'clear') {
-      getAllUsers(setUsers);
-    } else if (e.target.text === 'Man') {
-      getUsersByGender(text).then(setUsers);
-    } else if (e.target.text === 'Woman') {
-      getUsersByGender(text).then(setUsers);
-    } else if (e.target.text === 'Non-binary/non-conforming') {
-      getUsersByGender(text).then(setUsers);
-    } else if (e.target.text === 'Transfeminine') {
-      getUsersByGender(text).then(setUsers);
-    } else if (e.target.text === 'Transmasculine') {
-      getUsersByGender(text).then(setUsers);
-    } else if (e.target.text === 'she/her') {
-      getUsersByPronouns(text).then(setUsers);
-    } else if (e.target.text === 'they/them') {
-      getUsersByPronouns(text).then(setUsers);
-    } else if (e.target.text === 'he/him') {
-      getUsersByPronouns(text).then(setUsers);
-    } else if (e.target.text === 'Queer') {
-      getUsersBySexualOrientation(text).then(setUsers);
-    } else if (e.target.text === 'Pansexual') {
-      getUsersBySexualOrientation(text).then(setUsers);
-    } else if (e.target.text === 'Straight') {
-      getUsersBySexualOrientation(text).then(setUsers);
-    } else if (e.target.text === 'Gay') {
-      getUsersBySexualOrientation(text).then(setUsers);
-    } else if (e.target.text === 'Bisexual') {
-      getUsersBySexualOrientation(text).then(setUsers);
-    } else if (e.target.text === 'Lesbian') {
-      getUsersBySexualOrientation(text).then(setUsers);
-    } else if (e.target.text === 'Questioning') {
-      getUsersBySexualOrientation(text).then(setUsers);
-    } else if (e.target.text === 'Asexual') {
-      getUsersBySexualOrientation(text).then(setUsers);
-    } else if (e.target.text === 'White') {
-      getUsersByEthnicity(text).then(setUsers);
-    } else if (e.target.text === 'Black or African American') {
-      getUsersByEthnicity(text).then(setUsers);
-    } else if (e.target.text === 'Asian') {
-      getUsersByEthnicity(text).then(setUsers);
-    } else if (e.target.text === 'Native Hawaiian or Other Pacific Islander') {
-      getUsersByEthnicity(text).then(setUsers);
-    } else if (e.target.text === 'Other') {
-      getUsersByEthnicity(text).then(setUsers);
-    } else if (e.target.text === 'American Indian or Alaskan Native') {
-      getUsersByEthnicity(text).then(setUsers);
-    } else if (e.target.text === 'Hispanic, Latino/a/x, or of Spanish origin') {
-      getUsersByEthnicity(text).then(setUsers);
-    }
+  const handleFilter = (params) => {
+    let filteredUsers = users;
+    Object.keys(params).forEach((param) => {
+      filteredUsers = filteredUsers.filter((userObj) => userObj[param] === params[param]);
+    });
+    setUsers(filteredUsers);
   };
 
   return (
@@ -105,7 +58,7 @@ function Home() {
           </Dropdown.Toggle>
           <Dropdown.Menu>
             {genders.map((gender) => (
-              <Dropdown.Item key={gender.firebaseKey} onClick={handleClick} name="gender" value={gender.gender}>
+              <Dropdown.Item key={gender.firebaseKey} onClick={() => handleFilter({ gender: gender.gender })} name="gender" value={gender.gender}>
                 {gender.gender}
               </Dropdown.Item>
             ))}
@@ -118,7 +71,7 @@ function Home() {
           </Dropdown.Toggle>
           <Dropdown.Menu>
             {pronouns.map((pronoun) => (
-              <Dropdown.Item key={pronoun.firebaseKey} value={pronoun.pronoun} onClick={handleClick} name="pronoun">
+              <Dropdown.Item key={pronoun.firebaseKey} value={pronoun.pronoun} onClick={() => handleFilter({ pronoun: pronoun.pronoun })} name="pronoun">
                 {pronoun.pronoun}
               </Dropdown.Item>
             ))}
@@ -131,7 +84,7 @@ function Home() {
           </Dropdown.Toggle>
           <Dropdown.Menu>
             {sexualOrientations.map((sexualOrientation) => (
-              <Dropdown.Item key={sexualOrientation.firebaseKey} value={sexualOrientation.sexualOrientation} onClick={handleClick} name="sexualOrientation">
+              <Dropdown.Item key={sexualOrientation.firebaseKey} value={sexualOrientation.sexualOrientation} onClick={() => handleFilter({ sexualOrientation: sexualOrientation.sexualOrientation })} name="sexualOrientation">
                 {sexualOrientation.sexualOrientation}
               </Dropdown.Item>
             ))}
@@ -144,17 +97,17 @@ function Home() {
           </Dropdown.Toggle>
           <Dropdown.Menu>
             {ethnicities.map((ethnicity) => (
-              <Dropdown.Item key={ethnicity.firebaseKey} value={ethnicity.ethnicity} onClick={handleClick} name="ethnicity">
+              <Dropdown.Item key={ethnicity.firebaseKey} value={ethnicity.ethnicity} onClick={() => handleFilter({ ethnicity: ethnicity.ethnicity })} name="ethnicity">
                 {ethnicity.ethnicity}
               </Dropdown.Item>
             ))}
           </Dropdown.Menu>
         </Dropdown>
-        <Button variant="light" onClick={handleClick} value="clear">
+        <Button variant="light" onClick={() => getAllUsers()} value="clear">
           Clear Filters
         </Button>
       </div>
-      <div className="therapistCards">{users.map((userObj) => (userObj.isTherapist ? <UserCard key={userObj.firebaseKey} userObj={userObj} onUpdate={getAllUsers} /> : ''))}</div>
+      <div className="therapistCards">{users.length > 0 ? users.filter((userObj) => userObj.isTherapist).map((userObj) => <UserCard key={userObj.firebaseKey} userObj={userObj} onUpdate={getAllUsers} />) : <h2 className="d-flex justify-content-center">Sorry, there are no therapists who match your search.</h2>}</div>
     </div>
   );
 }

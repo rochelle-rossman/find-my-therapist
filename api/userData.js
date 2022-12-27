@@ -32,58 +32,6 @@ const getUsersByUid = (uid) => new Promise((resolve, reject) => {
     .catch((error) => reject(error));
 });
 
-const getUsersByGender = (gender) => new Promise((resolve, reject) => {
-  axios
-    .get(`${dbUrl}/users.json?orderBy="gender"&equalTo="${gender}"`)
-    .then((response) => {
-      if (response.data) {
-        resolve(Object.values(response.data));
-      } else {
-        resolve([]);
-      }
-    })
-    .catch((error) => reject(error));
-});
-
-const getUsersByPronouns = (pronouns) => new Promise((resolve, reject) => {
-  axios
-    .get(`${dbUrl}/users.json?orderBy="pronouns"&equalTo="${pronouns}"`)
-    .then((response) => {
-      if (response.data) {
-        resolve(Object.values(response.data));
-      } else {
-        resolve([]);
-      }
-    })
-    .catch((error) => reject(error));
-});
-
-const getUsersByEthnicity = (ethnicity) => new Promise((resolve, reject) => {
-  axios
-    .get(`${dbUrl}/users.json?orderBy="ethnicity"&equalTo="${ethnicity}"`)
-    .then((response) => {
-      if (response.data) {
-        resolve(Object.values(response.data));
-      } else {
-        resolve([]);
-      }
-    })
-    .catch((error) => reject(error));
-});
-
-const getUsersBySexualOrientation = (sexualOrientation) => new Promise((resolve, reject) => {
-  axios
-    .get(`${dbUrl}/users.json?orderBy="sexualOrientation"&equalTo="${sexualOrientation}"`)
-    .then((response) => {
-      if (response.data) {
-        resolve(Object.values(response.data));
-      } else {
-        resolve([]);
-      }
-    })
-    .catch((error) => reject(error));
-});
-
 const createUser = (userObj) => new Promise((resolve, reject) => {
   axios
     .post(`${dbUrl}/users.json`, userObj)
@@ -114,6 +62,5 @@ const deleteUser = (firebaseKey) => new Promise((resolve, reject) => {
 });
 
 export {
-  getUsers, getUsersByUid, updateUser, createUser, getSingleUser, deleteUser, getUsersByGender,
-  getUsersByEthnicity, getUsersByPronouns, getUsersBySexualOrientation,
+  getUsers, getUsersByUid, updateUser, createUser, getSingleUser, deleteUser,
 };

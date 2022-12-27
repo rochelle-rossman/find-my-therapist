@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import { useRouter } from 'next/router';
 import React, { useEffect, useState } from 'react';
 import { getSavedTherapists } from '../api/savedTherapistData';
@@ -25,7 +26,7 @@ export default function SavedTherapists() {
     getSavedTherapists(user.uid).then((therapistArr) => {
       setTherapists(therapistArr);
     }, []);
-  });
+  }, []);
 
   return (
     <div>
